@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صانع السيرة الذاتية الاحترافي</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <h1>CV<span>MAKER</span></h1>
+            <p>صمم سيرتك الذاتية بلمسة واحدة</p>
+        </header>
+
+        <section class="form-card">
+            <div class="input-group">
+                <label>الصورة الشخصية</label>
+                <input type="file" id="imageInput" accept="image/*" onchange="processImage(event)">
+            </div>
+            
+            <input type="text" id="nameInput" placeholder="الاسم الكامل">
+            <input type="text" id="jobInput" placeholder="المسمى الوظيفي (مثلاً: مبرمج)">
+            <input type="email" id="emailInput" placeholder="البريد الإلكتروني">
+            <input type="tel" id="phoneInput" placeholder="رقم الهاتف">
+            <textarea id="aboutInput" rows="5" placeholder="نبذة قصيرة عن مهاراتك وخبراتك..."></textarea>
+            
+            <button onclick="generatePDF()" class="download-btn">تحميل الـ CV (PDF) 🔥</button>
+        </section>
+    </div>
+
+    <div style="display: none;">
+        <div id="cv-template" class="pdf-design">
+            <div class="pdf-header">
+                <img id="pdfPhoto" src="" style="display:none;">
+                <div class="header-info">
+                    <h1 id="pdfName"></h1>
+                    <h2 id="pdfJob"></h2>
+                </div>
+            </div>
+            <div class="pdf-content">
+                <div class="pdf-side">
+                    <h3>التواصل</h3>
+                    <p id="pdfEmail"></p>
+                    <p id="pdfPhone"></p>
+                </div>
+                <div class="pdf-main">
+                    <h3>الملف الشخصي</h3>
+                    <p id="pdfAbout"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

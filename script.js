@@ -1,59 +1,55 @@
-let photoBase64 = "";
+let photoData = "";
 
 function processImage(event) {
     const reader = new FileReader();
     reader.onload = function() {
-        photoBase64 = reader.result;
-        document.getElementById('pdfPhoto').src = photoBase64;
-        document.getElementById('pdfPhoto').style.display = 'block';
+        photoData = reader.result;
+        document.getElementById('pdfPhoto').src = photoData;
     }
     reader.readAsDataURL(event.target.files[0]);
 }
 
 function generatePDF() {
-    // تعبئة البيانات يدوياً للتأكد
-    const data = {
-        name: document.getElementById('nameInput').value,
-        job: document.getElementById('jobInput').value,
-        about: document.getElementById('aboutInput').value,
-        exp: document.getElementById('expInput').value,
-        edu: document.getElementById('eduInput').value,
-        email: document.getElementById('emailInput').value,
-        phone: document.getElementById('phoneInput').value,
-        addr: document.getElementById('addressInput').value
-    };
-
-    document.getElementById('pdfName').innerText = data.name || "الاسم";
-    document.getElementById('pdfJob').innerText = data.job || "المسمى الوظيفي";
-    document.getElementById('pdfAbout').innerText = data.about;
-    document.getElementById('pdfExp').innerText = data.exp;
-    document.getElementById('pdfEdu').innerText = data.edu;
-    document.getElementById('pdfEmail').innerText = "Email: " + data.email;
-    document.getElementById('pdfPhone').innerText = "Phone: " + data.phone;
-    document.getElementById('pdfAddress').innerText = "Address: " + data.addr;
-
-    const wrapper = document.getElementById('pdf-wrapper');
-    const element = document.getElementById('cv-template');
+    // نقل النصوص للقالب
+    document.getElementById('pdfName').innerText = document.getElementById('nameInput').value || "الاسم الكامل";
+    document.getElementById('pdfJob').innerText = document.getElementById('jobInput').value || "المسمى الوظيفي";
+    document.getElementById('pdfAbout').innerText = document.getElementById('aboutInput').value;
+    document.getElementById('pdfExp').innerText = document.getElementById('expInput').value;
+    document.getElementById('pdfEdu').innerText = document.getElementById('eduInput').value;
     
-    // إظهار العنصر في مكان بعيد ليتمكن المحرك من رؤية النصوص
+    // بيانات التواصل
+    document.getElementById('pdfEmail').innerText = "✉️ " + (document.getElementById('emailInput').value || "");
+    document.getElementById('pdfPhone').innerText = "📞 " + (document.getElementById('phoneInput').value || "");
+    document.getElementById('pdfAddress').innerText = "📍 " + (document.getElementById('addressInput').value || "");
+
+    // المهارات
+    const skillsList = document.getElementById('pdfSkills');
+    skillsList.innerHTML = "";
+    const skills = document.getElementById('skillsInput').value.split(',');
+    skills.forEach(skill => {
+        if(skill.trim()) {
+            const li = document.createElement('li');
+            li.innerText = skill.trim();
+            skillsList.appendChild(li);
+        }
+    });
+
+    const element = document.getElementById('cv-template');
+    const wrapper = document.getElementById('pdf-wrapper');
     wrapper.style.display = 'block';
 
     const opt = {
         margin: 0,
-        filename: 'my_cv.pdf',
+        filename: 'My-Professional-CV.pdf',
         image: { type: 'jpeg', quality: 1 },
-        html2canvas: { 
-            scale: 2, 
-            useCORS: true,
-            backgroundColor: '#ffffff' // إجبار الخلفية البيضاء
-        },
+        html2canvas: { scale: 3, useCORS: true, letterRendering: true },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
 
-    // إضافة تأخير (Delay) أطول قليلاً لضمان تحميل الخطوط
+    // الانتظار ثانية لضمان رندرة النصوص
     setTimeout(() => {
         html2pdf().set(opt).from(element).save().then(() => {
-            console.log("تم التحميل بنجاح");
+            // التحميل اكتمل
         });
-    }, 1000); 
+    }, 1000);
 }

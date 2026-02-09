@@ -1,70 +1,59 @@
 let photoBase64 = "";
 
-// معالجة الصورة وتحويلها
 function processImage(event) {
     const reader = new FileReader();
     reader.onload = function() {
         photoBase64 = reader.result;
-        const img = document.getElementById('pdfPhoto');
-        img.src = photoBase64;
-        img.style.display = 'block';
+        document.getElementById('pdfPhoto').src = photoBase64;
+        document.getElementById('pdfPhoto').style.display = 'block';
     }
     reader.readAsDataURL(event.target.files[0]);
 }
 
 function generatePDF() {
-    // 1. ملء البيانات في القالب من المدخلات
-    document.getElementById('pdfName').innerText = document.getElementById('nameInput').value || "الاسم الكامل";
-    document.getElementById('pdfJob').innerText = document.getElementById('jobInput').value || "المسمى الوظيفي";
-    document.getElementById('pdfAbout').innerText = document.getElementById('aboutInput').value || "";
-    document.getElementById('pdfExp').innerText = document.getElementById('expInput').value || "";
-    document.getElementById('pdfEdu').innerText = document.getElementById('eduInput').value || "";
-    
-    // بيانات الاتصال
-    document.getElementById('pdfEmail').innerText = "✉️ " + (document.getElementById('emailInput').value || "");
-    document.getElementById('pdfPhone').innerText = "📞 " + (document.getElementById('phoneInput').value || "");
-    document.getElementById('pdfAddress').innerText = "📍 " + (document.getElementById('addressInput').value || "");
+    // تعبئة البيانات يدوياً للتأكد
+    const data = {
+        name: document.getElementById('nameInput').value,
+        job: document.getElementById('jobInput').value,
+        about: document.getElementById('aboutInput').value,
+        exp: document.getElementById('expInput').value,
+        edu: document.getElementById('eduInput').value,
+        email: document.getElementById('emailInput').value,
+        phone: document.getElementById('phoneInput').value,
+        addr: document.getElementById('addressInput').value
+    };
 
-    // معالجة المهارات (تحويل الكلمات لنقاط)
-    const skillsInput = document.getElementById('skillsInput').value;
-    const skillsList = document.getElementById('pdfSkills');
-    skillsList.innerHTML = "";
-    if(skillsInput) {
-        skillsInput.split(',').forEach(skill => {
-            if(skill.trim()) {
-                let li = document.createElement('li');
-                li.innerText = skill.trim();
-                skillsList.appendChild(li);
-            }
-        });
-    }
+    document.getElementById('pdfName').innerText = data.name || "الاسم";
+    document.getElementById('pdfJob').innerText = data.job || "المسمى الوظيفي";
+    document.getElementById('pdfAbout').innerText = data.about;
+    document.getElementById('pdfExp').innerText = data.exp;
+    document.getElementById('pdfEdu').innerText = data.edu;
+    document.getElementById('pdfEmail').innerText = "Email: " + data.email;
+    document.getElementById('pdfPhone').innerText = "Phone: " + data.phone;
+    document.getElementById('pdfAddress').innerText = "Address: " + data.addr;
 
-    // 2. إعداد عملية التحميل
-    const element = document.getElementById('cv-template');
     const wrapper = document.getElementById('pdf-wrapper');
+    const element = document.getElementById('cv-template');
     
-    // جعل العنصر مرئياً للمتصفح قبل التحويل
+    // إظهار العنصر في مكان بعيد ليتمكن المحرك من رؤية النصوص
     wrapper.style.display = 'block';
 
-    const options = {
+    const opt = {
         margin: 0,
-        filename: 'My-Professional-CV.pdf',
+        filename: 'my_cv.pdf',
         image: { type: 'jpeg', quality: 1 },
         html2canvas: { 
-            scale: 3, 
-            useCORS: true, 
-            letterRendering: true,
-            allowTaint: false
+            scale: 2, 
+            useCORS: true,
+            backgroundColor: '#ffffff' // إجبار الخلفية البيضاء
         },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
 
-    // 3. تنفيذ التحميل بعد تأخير بسيط (700ms) للتأكد من رندرة النصوص
+    // إضافة تأخير (Delay) أطول قليلاً لضمان تحميل الخطوط
     setTimeout(() => {
-        html2pdf().set(options).from(element).save().then(() => {
-            // لا حاجة لإخفائه لأنه بعيد عن الشاشة أصلاً بالـ CSS الجديد
-        }).catch(err => {
-            console.error("PDF Error: ", err);
+        html2pdf().set(opt).from(element).save().then(() => {
+            console.log("تم التحميل بنجاح");
         });
-    }, 700);
+    }, 1000); 
 }

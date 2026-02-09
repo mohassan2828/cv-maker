@@ -1,74 +1,74 @@
 :root {
-    --gold: #c5a059;
-    --dark: #121212;
-    --soft-bg: #fdfdfd;
+    --main-dark: #000428;
     --accent-blue: #004e92;
+    --gold-line: #c5a059;
+    --bg-light: #fdfdfd;
 }
 
-body { font-family: 'Cairo', sans-serif; background: #f0f2f5; margin: 0; direction: rtl; }
+body { font-family: 'Cairo', sans-serif; background: #eee; margin: 0; direction: rtl; }
 
-/* واجهة التطبيق */
-.app-container { padding: 20px; max-width: 550px; margin: auto; }
-.app-header { text-align: center; margin-bottom: 30px; }
-.logo-icon { font-size: 40px; margin-bottom: 10px; }
-.form-card { background: white; padding: 25px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-.step-box { background: #f8fafc; padding: 15px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #edf2f7; }
-input, textarea { width: 100%; padding: 12px; margin-top: 8px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; }
-.magic-btn { width: 100%; padding: 20px; background: linear-gradient(135deg, #004e92, #000428); color: white; border: none; border-radius: 15px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+/* واجهة الموبايل */
+.app-container { padding: 15px; max-width: 480px; margin: auto; }
+.form-card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+input, textarea { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; }
+.magic-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, #004e92, #000428); color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 18px; cursor: pointer; }
 
-/* --- تصميم الـ PDF الجبار --- */
+/* --- تصميم الـ PDF (زي كانفا بالظبط) --- */
 #pdf-wrapper { position: absolute; left: -10000px; top: 0; }
 
 .canva-cv {
     width: 210mm; min-height: 297mm;
-    background: var(--soft-bg);
+    background: var(--bg-light);
     display: flex !important;
     position: relative;
-    overflow: hidden;
 }
 
-/* شكل هندسي جمالي في الخلفية */
-.bg-shape {
-    position: absolute; width: 400px; height: 400px;
-    background: rgba(0, 78, 146, 0.03);
-    border-radius: 50%; top: -100px; left: -100px;
-}
-
-.left-panel {
+/* العمود الجانبي الملون */
+.sidebar {
     width: 35%;
-    background: var(--dark) !important;
+    background: var(--main-dark) !important;
     color: white !important;
-    padding: 60px 30px;
-    z-index: 1;
+    padding: 50px 20px;
+    box-sizing: border-box;
 }
 
-.photo-container {
-    width: 180px; height: 180px;
-    border: 6px solid var(--gold);
-    margin: 0 auto 40px;
+.photo-frame {
+    width: 170px; height: 170px;
+    border: 5px solid var(--gold-line);
+    margin: 0 auto 30px;
     overflow: hidden;
-    transform: rotate(3deg);
-    border-radius: 20px;
+    border-radius: 15px;
 }
 
-#pdfPhoto { width: 100%; height: 100%; object-fit: cover; transform: rotate(-3deg); }
+#pdfPhoto { width: 100%; height: 100%; object-fit: cover; }
 
-.side-content h3 { color: var(--gold); border-bottom: 1px solid #333; padding-bottom: 10px; font-size: 20px; }
-.contact-item { font-size: 14px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+.sidebar h3 { color: var(--gold-line); border-bottom: 2px solid #333; padding-bottom: 10px; font-size: 20px; }
+.contact-info p { font-size: 13px; margin: 10px 0; line-height: 1.6; color: #ddd !important; }
 
-.skills-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-.skills-grid span { background: #333; padding: 5px 12px; border-radius: 20px; font-size: 12px; border: 1px solid var(--gold); }
-
-.right-panel { width: 65%; padding: 70px 50px; z-index: 1; }
-.cv-header h1 { font-family: 'Montserrat', sans-serif; font-size: 50px; margin: 0; color: var(--dark); line-height: 1; }
-.cv-header h2 { font-size: 22px; color: var(--gold); margin: 10px 0; font-weight: 400; }
-.accent-line { width: 80px; height: 6px; background: var(--accent-blue); margin-bottom: 50px; }
-
-.main-section { margin-bottom: 40px; }
-.main-section h4 { 
-    display: flex; align-items: center; gap: 10px;
-    font-size: 19px; color: var(--accent-blue); margin-bottom: 15px; 
+/* الجزء الرئيسي */
+.main-area {
+    width: 65%;
+    padding: 60px 40px;
+    box-sizing: border-box;
 }
-.dot { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; }
 
-.rich-text { font-size: 15px; line-height: 1.8; color: #444; white-space: pre-line; border-right: 2px solid #eee; padding-right: 20px; }
+.cv-header h1 { font-size: 45px; color: var(--main-dark); margin: 0; font-weight: 900; }
+.cv-header h2 { font-size: 22px; color: var(--accent-blue); margin: 5px 0 30px; }
+
+.cv-section { margin-bottom: 35px; }
+.cv-section h4 {
+    background: #f1f5f9 !important;
+    color: var(--main-dark) !important;
+    padding: 10px 15px;
+    border-right: 6px solid var(--gold-line);
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.text-content {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444 !important;
+    white-space: pre-line;
+    padding-right: 15px;
+}

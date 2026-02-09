@@ -1,48 +1,50 @@
-
 function generateCV() {
   document.getElementById("cv-name").innerText =
     document.getElementById("name").value;
 
-  document.getElementById("cv-title").innerText =
-    document.getElementById("title").value;
+  document.getElementById("cv-job").innerText =
+    document.getElementById("job").value;
 
-  document.getElementById("cv-address").innerText =
-    document.getElementById("address").value;
+  document.getElementById("cv-summary").innerText =
+    document.getElementById("summary").value;
 
-  document.getElementById("cv-phone").innerText =
-    document.getElementById("phone").value;
-
-  // Skills
   const skills = document.getElementById("skills").value.split(",");
-  const skillsList = document.getElementById("cv-skills");
-  skillsList.innerHTML = "";
+  const ul = document.getElementById("cv-skills");
+  ul.innerHTML = "";
 
   skills.forEach(skill => {
     let li = document.createElement("li");
     li.innerText = skill.trim();
-    skillsList.appendChild(li);
+    ul.appendChild(li);
   });
 
-  // Image
-  const photo = document.getElementById("photo").files[0];
-  if (photo) {
+  const file = document.getElementById("photo").files[0];
+  if (file) {
     const reader = new FileReader();
-    reader.onload = function () {
+    reader.onload = () =>
       document.getElementById("cv-photo").src = reader.result;
-    };
-    reader.readAsDataURL(photo);
+    reader.readAsDataURL(file);
   }
 }
 
-function downloadPDF() {
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF();
+/* THEME */
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+}
 
-  pdf.html(document.getElementById("cv"), {
-    callback: function (doc) {
-      doc.save("My_CV.pdf");
-    },
-    x: 10,
-    y: 10
+/* TEMPLATE */
+document.getElementById("templateSelect").addEventListener("change", function () {
+  const cv = document.getElementById("cv");
+  cv.className = "cv " + this.value;
+});
+
+/* PDF */
+function downloadPDF() {
+  html2pdf(document.getElementById("cv"), {
+    margin: 0,
+    filename: "CV.pdf",
+    image: { type: "jpeg", quality: 1 },
+    html2canvas: { scale: 2 },
+    jsPDF: { format: "a4", orientation: "portrait" }
   });
 }

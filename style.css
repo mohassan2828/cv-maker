@@ -1,58 +1,79 @@
 :root {
-    --main-color: #2563eb;
-    --bg-color: #f8fafc;
-    --card-bg: #ffffff;
-    --text-dark: #1e293b;
+    --primary: #0f172a; /* كحلي ملكي */
+    --accent: #3b82f6;  /* أزرق التقنية */
+    --bg-gray: #f8fafc;
 }
 
 body {
     font-family: 'Cairo', sans-serif;
-    background-color: var(--bg-color);
-    margin: 0; padding: 0; color: var(--text-dark);
+    background-color: var(--bg-gray);
+    margin: 0; padding: 0; direction: rtl;
 }
 
-.app-container { padding: 20px; max-width: 500px; margin: auto; }
-
-header { text-align: center; margin-bottom: 30px; }
-header h1 { font-size: 30px; margin: 0; letter-spacing: 2px; }
-header h1 span { color: var(--main-color); }
+/* تنسيق الواجهة على الموبايل */
+.app-container { padding: 15px; max-width: 500px; margin: auto; }
+header { text-align: center; margin: 20px 0; }
+header h1 { font-size: 32px; color: var(--primary); margin: 0; }
+header h1 span { color: var(--accent); }
 
 .form-card {
-    background: var(--card-bg);
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    background: white; padding: 25px; border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.section-title {
+    font-size: 18px; color: var(--primary);
+    border-right: 4px solid var(--accent);
+    padding-right: 10px; margin: 25px 0 15px;
 }
 
 input, textarea {
-    width: 100%; padding: 12px; margin-bottom: 15px;
-    border: 1px solid #e2e8f0; border-radius: 10px;
+    width: 100%; padding: 14px; margin-bottom: 12px;
+    border: 1px solid #e2e8f0; border-radius: 12px;
     font-family: inherit; font-size: 16px; box-sizing: border-box;
 }
 
 .download-btn {
-    width: 100%; padding: 15px; background: var(--main-color);
+    width: 100%; padding: 18px; background: var(--accent);
     color: white; border: none; border-radius: 12px;
     font-size: 18px; font-weight: bold; cursor: pointer;
-    transition: 0.3s;
+    margin-top: 20px; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
 }
 
-/* تنسيق الـ PDF الجبار */
+/* تنسيق الـ PDF الجبار (A4) */
 .pdf-design {
-    width: 210mm; padding: 40px; background: white; direction: rtl;
+    width: 210mm; min-height: 297mm; display: flex;
+    background: white; color: #334155;
 }
 
-.pdf-header {
-    display: flex; align-items: center; gap: 30px;
-    border-bottom: 4px solid var(--main-color); padding-bottom: 20px;
+.sidebar {
+    width: 32%; background: var(--primary); color: white;
+    padding: 40px 20px; display: flex; flex-direction: column;
 }
 
 #pdfPhoto {
-    width: 130px; height: 130px; border-radius: 50%;
-    object-fit: cover; border: 4px solid #eee;
+    width: 140px; height: 140px; border-radius: 20px;
+    object-fit: cover; border: 3px solid var(--accent);
+    margin: 0 auto 30px;
 }
 
-.pdf-content { display: flex; margin-top: 30px; gap: 40px; }
-.pdf-side { width: 30%; border-left: 2px solid #eee; }
-.pdf-main { width: 70%; }
-h3 { color: var(--main-color); border-bottom: 1px solid #eee; }
+.side-item h4 {
+    color: var(--accent); font-size: 18px;
+    border-bottom: 1px solid #334155; padding-bottom: 5px;
+}
+
+.side-item p { font-size: 13px; line-height: 1.8; margin: 5px 0; }
+.side-item ul { padding-right: 20px; font-size: 14px; }
+
+.main-content { width: 68%; padding: 50px 35px; }
+.header-main h1 { font-size: 40px; color: var(--primary); margin: 0; }
+.header-main h2 { font-size: 22px; color: var(--accent); margin-bottom: 20px; }
+
+.cv-section { margin-bottom: 30px; }
+.cv-section h4 {
+    background: #f1f5f9; padding: 10px;
+    border-right: 6px solid var(--accent);
+    color: var(--primary); font-size: 18px;
+}
+
+.text-block { white-space: pre-line; line-height: 1.7; font-size: 15px; color: #475569; }

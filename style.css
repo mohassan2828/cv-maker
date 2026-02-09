@@ -1,74 +1,22 @@
-:root {
-    --main-dark: #000428;
-    --accent-blue: #004e92;
-    --gold-line: #c5a059;
-    --bg-light: #fdfdfd;
-}
-
-body { font-family: 'Cairo', sans-serif; background: #eee; margin: 0; direction: rtl; }
-
-/* واجهة الموبايل */
-.app-container { padding: 15px; max-width: 480px; margin: auto; }
-.form-card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+:root { --side-bg: #2c3e50; --gold: #d4af37; --bg-white: #ffffff; }
+body { font-family: 'Cairo', sans-serif; background: #f4f7f6; margin: 0; direction: rtl; }
+.app-container { padding: 15px; max-width: 500px; margin: auto; }
+.app-header { text-align: center; margin-bottom: 20px; color: var(--side-bg); }
+.form-card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
 input, textarea { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; }
-.magic-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, #004e92, #000428); color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 18px; cursor: pointer; }
-
-/* --- تصميم الـ PDF (زي كانفا بالظبط) --- */
+.magic-btn { width: 100%; padding: 18px; background: var(--side-bg); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 18px; }
 #pdf-wrapper { position: absolute; left: -10000px; top: 0; }
-
-.canva-cv {
-    width: 210mm; min-height: 297mm;
-    background: var(--bg-light);
-    display: flex !important;
-    position: relative;
-}
-
-/* العمود الجانبي الملون */
-.sidebar {
-    width: 35%;
-    background: var(--main-dark) !important;
-    color: white !important;
-    padding: 50px 20px;
-    box-sizing: border-box;
-}
-
-.photo-frame {
-    width: 170px; height: 170px;
-    border: 5px solid var(--gold-line);
-    margin: 0 auto 30px;
-    overflow: hidden;
-    border-radius: 15px;
-}
-
+.canva-cv { width: 210mm; min-height: 297mm; background: var(--bg-white); display: flex !important; position: relative; overflow: hidden; }
+.top-decoration { position: absolute; top: 0; left: 0; width: 300px; height: 60px; background: linear-gradient(to right, var(--side-bg), var(--gold)); clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%); }
+.sidebar { width: 32%; background: var(--side-bg) !important; color: white !important; padding: 60px 20px; z-index: 1; }
+.photo-container { width: 160px; height: 160px; border: 4px solid var(--gold); margin: 0 auto 35px; border-radius: 12px; overflow: hidden; }
 #pdfPhoto { width: 100%; height: 100%; object-fit: cover; }
-
-.sidebar h3 { color: var(--gold-line); border-bottom: 2px solid #333; padding-bottom: 10px; font-size: 20px; }
-.contact-info p { font-size: 13px; margin: 10px 0; line-height: 1.6; color: #ddd !important; }
-
-/* الجزء الرئيسي */
-.main-area {
-    width: 65%;
-    padding: 60px 40px;
-    box-sizing: border-box;
-}
-
-.cv-header h1 { font-size: 45px; color: var(--main-dark); margin: 0; font-weight: 900; }
-.cv-header h2 { font-size: 22px; color: var(--accent-blue); margin: 5px 0 30px; }
-
-.cv-section { margin-bottom: 35px; }
-.cv-section h4 {
-    background: #f1f5f9 !important;
-    color: var(--main-dark) !important;
-    padding: 10px 15px;
-    border-right: 6px solid var(--gold-line);
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-.text-content {
-    font-size: 15px;
-    line-height: 1.8;
-    color: #444 !important;
-    white-space: pre-line;
-    padding-right: 15px;
-}
+.side-section h3 { color: var(--gold) !important; border-bottom: 2px solid rgba(212, 175, 55, 0.3); padding-bottom: 8px; font-size: 20px; }
+.contact-p { font-size: 13px; margin: 12px 0; color: #ecf0f1 !important; }
+.skills-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 15px; }
+.skill-tag { background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 5px; font-size: 12px; border: 1px solid var(--gold); color: white; }
+.main-content { width: 68%; padding: 85px 40px 50px; }
+.cv-header h1 { font-size: 45px; color: var(--side-bg) !important; margin: 0; font-weight: 800; }
+.cv-header h2 { font-size: 22px; color: var(--gold) !important; margin: 5px 0 40px; }
+.content-block h4 { font-size: 19px; color: var(--side-bg) !important; border-right: 5px solid var(--gold); padding-right: 15px; background: #f8fafc !important; padding: 10px; margin-bottom: 15px; }
+.rich-text { font-size: 15px; line-height: 1.8; color: #444 !important; white-space: pre-line; padding-right: 15px; }

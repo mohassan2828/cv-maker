@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CVForge | Professional Builder</title>
+    <title>CVForge Ultra | النسخة المتكاملة</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Almarai:wght@800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -13,108 +13,101 @@
     
     <style>
         :root { 
-            --primary: #4f46e5; /* بنفسجي ملكي */
-            --secondary: #0ea5e9; /* أزرق سماوي */
-            --bg-light: #f8fafc;
+            --primary: #4f46e5;
+            --secondary: #0ea5e9;
+            --bg-light: #f1f5f9;
             --text-dark: #1e293b;
         }
 
-        /* --- استقرار الموقع ومنع التمرير الجانبي --- */
+        /* استقرار الموقع ومنع الانزلاق الجانبي */
         html, body { 
             margin: 0; padding: 0; width: 100%; overflow-x: hidden; 
             font-family: 'Cairo', sans-serif; background: var(--bg-light); color: var(--text-dark);
+            touch-action: pan-y; /* يسمح بالتمرير الرأسي فقط */
         }
 
-        /* --- الهيدر الجديد (فاتح وبأيقونة) --- */
         header { 
             background: white; padding: 20px; text-align: center; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-bottom: 2px solid #e2e8f0;
+            position: sticky; top: 0; z-index: 100;
         }
         .logo-box { display: flex; align-items: center; justify-content: center; gap: 10px; }
         .logo-box i { font-size: 28px; color: var(--primary); }
         .logo-box h1 { font-size: 24px; font-weight: 900; margin: 0; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .app-container { 
-            width: 100%; max-width: 500px; margin: 20px auto; padding: 15px; box-sizing: border-box; 
-        }
+        .app-container { width: 100%; max-width: 550px; margin: 20px auto; padding: 15px; box-sizing: border-box; }
 
         .form-card { 
             background: white; padding: 25px; border-radius: 25px; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #f1f5f9;
         }
 
-        .input-item { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 700; color: #64748b; }
+        .input-item { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 700; color: #64748b; }
         input, textarea { 
             width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #f1f5f9; 
             background: #fff; color: var(--text-dark); font-family: inherit; 
-            box-sizing: border-box; transition: 0.3s;
+            box-sizing: border-box; transition: 0.3s; font-size: 15px;
         }
-        input:focus { border-color: var(--primary); outline: none; }
+        input:focus, textarea:focus { border-color: var(--primary); outline: none; background: #fafbff; }
 
         .btn-download { 
             width: 100%; padding: 18px; background: linear-gradient(135deg, var(--primary), var(--secondary)); 
             border: none; border-radius: 15px; color: white; font-weight: 900; font-size: 18px; 
             cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
         }
 
-        /* --- تصميم الـ PDF (عالي الجودة وملء الصفحة) --- */
+        /* --- تصميم الـ PDF عالي الجودة --- */
         #render-area { position: absolute; left: -9999px; top: 0; }
         .pdf-page { 
             width: 210mm; height: 297mm; background: white; color: #1e293b;
-            display: grid; grid-template-columns: 240px 1fr; position: relative; overflow: hidden;
+            display: grid; grid-template-columns: 260px 1fr; position: relative; overflow: hidden;
         }
-
-        /* لمسات جرافيك في الخلفية */
-        .decor-circle { position: absolute; width: 400px; height: 400px; background: var(--secondary); opacity: 0.05; border-radius: 50%; top: -200px; left: -200px; }
 
         .pdf-sidebar { 
             background: #1e293b; color: white; padding: 40px 25px; 
             display: flex; flex-direction: column; z-index: 1;
         }
-        .pdf-main { padding: 0; display: flex; flex-direction: column; z-index: 1; }
+        
+        .pdf-photo { 
+            width: 200px; height: 200px; border-radius: 20px; border: 5px solid rgba(255,255,255,0.1); 
+            margin-bottom: 30px; object-fit: cover; align-self: center;
+        }
 
-        /* منطقة الاسم (كبيرة وجذابة) */
         .pdf-name-card { 
             background: linear-gradient(to left, var(--primary), var(--secondary)); 
-            padding: 50px; color: white; clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            margin-bottom: 20px;
+            padding: 60px 50px; color: white; clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-bottom: 10px;
         }
-        .pdf-name-card h1 { font-family: 'Almarai', sans-serif; font-size: 55px; margin: 0; line-height: 1; }
-        .pdf-name-card p { font-size: 22px; margin: 10px 0 0; opacity: 0.9; }
+        .pdf-name-card h1 { font-family: 'Almarai', sans-serif; font-size: 58px; margin: 0; }
 
-        .pdf-photo { 
-            width: 180px; height: 180px; border-radius: 20px; border: 5px solid white; 
-            margin-bottom: 30px; object-fit: cover; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .pdf-section { padding: 20px 40px; }
+        .pdf-section { padding: 15px 45px; }
         .pdf-sec-title { 
             font-size: 22px; font-weight: 900; color: var(--primary); 
-            border-bottom: 3px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 15px;
+            border-bottom: 3px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 12px;
             display: flex; align-items: center; gap: 10px;
         }
-        .pdf-sec-title i { font-size: 18px; }
 
-        .pdf-text { font-size: 15px; line-height: 1.8; color: #334155; white-space: pre-line; text-align: justify; }
+        .pdf-text { font-size: 15px; line-height: 1.7; color: #334155; white-space: pre-line; text-align: justify; }
         
-        .side-sec-title { font-size: 18px; font-weight: 900; color: var(--secondary); margin: 30px 0 15px; }
-        .side-text { font-size: 14px; line-height: 2; color: #cbd5e1; }
+        .side-sec-title { font-size: 19px; font-weight: 900; color: var(--secondary); margin: 25px 0 10px; border-right: 4px solid var(--secondary); padding-right: 10px; }
+        .side-text { font-size: 14px; line-height: 1.8; color: #cbd5e1; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo-box">
-            <i class="fas fa-file-invoice"></i>
-            <h1>CVForge</h1>
+            <i class="fas fa-feather-alt"></i>
+            <h1>CVForge Builder</h1>
         </div>
     </header>
 
     <div class="app-container">
         <div class="form-card">
-            <div class="input-item"><label>الاسم بالكامل</label><input type="text" id="inName" placeholder="مثال: أحمد محمد"></div>
-            <div class="input-item"><label>المسمى الوظيفي</label><input type="text" id="inJob" placeholder="مثال: مهندس برمجيات"></div>
+            <div class="input-item"><label>الاسم بالكامل</label><input type="text" id="inName" placeholder="أدخل اسمك فقط"></div>
+            <div class="input-item"><label>المسمى الوظيفي</label><input type="text" id="inJob" placeholder="مثال: مدير عمليات"></div>
             <div class="input-item"><label>الصورة الشخصية</label><input type="file" id="inPhoto"></div>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
@@ -122,21 +115,26 @@
                 <div class="input-item"><label>الإيميل</label><input type="text" id="inEmail"></div>
             </div>
 
-            <div class="input-item"><label>نبذة عنك (املاها كويس)</label><textarea id="inAbout" rows="3"></textarea></div>
-            <div class="input-item"><label>الخبرات المهنية</label><textarea id="inExp" rows="6"></textarea></div>
-            <div class="input-item"><label>التعليم</label><textarea id="inEdu" rows="2"></textarea></div>
-            <div class="input-item"><label>المهارات</label><textarea id="inSkills" rows="2"></textarea></div>
+            <div class="input-item"><label>الملف الشخصي</label><textarea id="inAbout" rows="3"></textarea></div>
+            <div class="input-item"><label>الخبرة العملية</label><textarea id="inExp" rows="5"></textarea></div>
+            
+            <div class="input-item"><label>أهم الإنجازات أو المشاريع (لملء الفراغ)</label><textarea id="inAwards" rows="3" placeholder="جوائز حصلت عليها أو مشاريع ناجحة..."></textarea></div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="input-item"><label>التعليم</label><textarea id="inEdu" rows="3"></textarea></div>
+                <div class="input-item"><label>اللغات</label><textarea id="inLang" rows="3" placeholder="العربية (الأم)&#10;الإنجليزية (جيد جداً)"></textarea></div>
+            </div>
+            
+            <div class="input-item"><label>المهارات</label><input type="text" id="inSkills" placeholder="فوتوشوب، إكسل، إدارة وقت..."></div>
 
             <button class="btn-download" onclick="createPDF()">
-                <i class="fas fa-magic"></i> بناء السيرة الذاتية
+                <i class="fas fa-file-pdf"></i> تحميل الـ CV الاحترافي
             </button>
         </div>
     </div>
 
     <div id="render-area">
         <div id="cv-paper" class="pdf-page">
-            <div class="decor-circle"></div>
-            
             <div class="pdf-sidebar">
                 <img id="outPhoto" class="pdf-photo" src="">
                 
@@ -146,19 +144,24 @@
                 <div class="side-sec-title">التعليم</div>
                 <div id="outEdu" class="side-text"></div>
 
+                <div class="side-sec-title">اللغات</div>
+                <div id="outLang" class="side-text"></div>
+
                 <div class="side-sec-title">المهارات</div>
                 <div id="outSkills" class="side-text"></div>
             </div>
 
             <div class="pdf-main">
-                <div class="pdf-name-card">
-                    <h1 id="outName"></h1>
-                    <p id="outJob"></p>
-                </div>
+                <div class="pdf-name-card"><h1 id="outName"></h1><p id="outJob"></p></div>
 
                 <div class="pdf-section">
                     <div class="pdf-sec-title"><i class="fas fa-user"></i> الملف الشخصي</div>
                     <div id="outAbout" class="pdf-text"></div>
+                </div>
+
+                <div class="pdf-section">
+                    <div class="pdf-sec-title"><i class="fas fa-award"></i> الإنجازات والمشاريع</div>
+                    <div id="outAwards" class="pdf-text"></div>
                 </div>
 
                 <div class="pdf-section">
@@ -177,17 +180,17 @@
         };
 
         async function createPDF() {
-            // نقل البيانات
             document.getElementById('outName').innerText = document.getElementById('inName').value || "الاسم الكامل";
-            document.getElementById('outJob').innerText = document.getElementById('inJob').value || "المسمى الوظيفي";
+            document.getElementById('outJob').innerText = document.getElementById('inJob').value || "الوظيفة";
             document.getElementById('outContact').innerText = `📞 ${document.getElementById('inPhone').value}\n✉️ ${document.getElementById('inEmail').value}`;
             document.getElementById('outAbout').innerText = document.getElementById('inAbout').value;
             document.getElementById('outExp').innerText = document.getElementById('inExp').value;
             document.getElementById('outEdu').innerText = document.getElementById('inEdu').value;
+            document.getElementById('outLang').innerText = document.getElementById('inLang').value;
+            document.getElementById('outAwards').innerText = document.getElementById('inAwards').value;
             document.getElementById('outSkills').innerText = document.getElementById('inSkills').value;
 
-            const element = document.getElementById('cv-paper');
-            const canvas = await html2canvas(element, { scale: 4, useCORS: true }); // دقة فائقة 4x
+            const canvas = await html2canvas(document.getElementById('cv-paper'), { scale: 4, useCORS: true });
             const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
             pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
             pdf.save('Professional_CV.pdf');

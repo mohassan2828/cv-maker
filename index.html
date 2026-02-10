@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CVForge | Multi-Language Edition</title>
+    <title>CVForge AI | Cultural Intelligence</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Inter:wght@400;700;900&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -16,101 +16,112 @@
             --primary: #6366f1;
             --secondary: #0ea5e9;
             --bg-site: #f8fafc;
-            --text-main: #0f172a;
         }
 
-        /* تنسيقات اللغة */
-        [dir="ltr"] { font-family: 'Inter', sans-serif; }
-        [dir="rtl"] { font-family: 'Cairo', sans-serif; }
+        body { margin: 0; background: var(--bg-site); transition: 0.4s; overflow-x: hidden; }
 
-        body { margin: 0; background: var(--bg-site); color: var(--text-main); transition: all 0.3s ease; }
-
-        /* زر تبديل اللغة العائم */
-        .lang-switcher {
-            position: fixed; top: 20px; left: 20px; z-index: 1000;
-            background: white; border: 2px solid var(--primary);
-            padding: 8px 15px; border-radius: 50px; cursor: pointer;
-            font-weight: 900; color: var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
+        /* فقاعات الخلفية */
+        .bubbles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .bubble { position: absolute; bottom: -100px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; opacity: 0.08; animation: rise 15s infinite ease-in; }
+        @keyframes rise { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-120vh) scale(1.5); opacity: 0; } }
 
         header { 
             background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
-            padding: 25px; text-align: center; border-bottom: 1px solid #e2e8f0;
+            padding: 25px; text-align: center; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100;
         }
         .brand-logo { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 28px; font-weight: 900; }
         .brand-logo i { color: var(--primary); }
         .brand-logo span { background: linear-gradient(to left, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .brand-tagline { font-size: 13px; color: #64748b; font-weight: 600; margin-top: 5px; }
 
-        .app-container { width: 100%; max-width: 500px; margin: 20px auto; padding: 0 15px; box-sizing: border-box; }
+        .app-container { width: 100%; max-width: 550px; margin: 20px auto; padding: 0 15px; box-sizing: border-box; }
         .card-editor { background: white; padding: 25px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
 
+        /* اختيار الثقافة */
+        .culture-box { background: #f0f7ff; padding: 15px; border-radius: 20px; margin-bottom: 20px; border: 1px dashed var(--primary); }
+        .culture-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px; }
+        .c-btn { padding: 10px; border: 1px solid #cbd5e1; border-radius: 12px; background: white; cursor: pointer; font-family: 'Cairo'; font-size: 12px; transition: 0.3s; }
+        .c-btn.active { background: var(--primary); color: white; border-color: var(--primary); font-weight: 900; }
+
         .input-box { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 700; color: #64748b; }
+        label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 700; color: #475569; }
         input, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #f1f5f9; font-family: inherit; box-sizing: border-box; }
 
-        .btn-create { 
-            width: 100%; padding: 18px; background: linear-gradient(135deg, var(--primary), var(--secondary)); 
-            border: none; border-radius: 15px; color: white; font-weight: 900; font-size: 18px; cursor: pointer;
-        }
+        .btn-create { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; border-radius: 15px; color: white; font-weight: 900; font-size: 18px; cursor: pointer; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2); }
 
-        /* --- تصميم الـ PDF الديناميكي --- */
+        /* --- تصميم الـ PDF عالي الجودة --- */
         #pdf-hideout { position: absolute; left: -9999px; top: 0; }
-        .cv-document { 
-            width: 210mm; height: 297mm; background: white; 
-            display: grid; grid-template-columns: 260px 1fr;
-        }
-        /* تبديل مكان العمود عند اللغة الإنجليزية */
+        .cv-document { width: 210mm; height: 297mm; background: white; display: grid; grid-template-columns: 260px 1fr; }
+        
+        /* تأثيرات الاتجاه الثقافي */
         [dir="ltr"] .cv-document { grid-template-columns: 1fr 260px; }
         [dir="ltr"] .cv-sidebar { order: 2; }
         [dir="ltr"] .cv-main { order: 1; padding-left: 25px; padding-right: 0; }
 
-        .cv-sidebar { background: #0f172a; color: white; padding: 40px 25px; display: flex; flex-direction: column; }
-        .cv-photo { width: 170px; height: 170px; border-radius: 20px; border: 4px solid var(--secondary); margin-bottom: 30px; object-fit: cover; align-self: center; }
+        .cv-sidebar { background: #0f172a; color: white; padding: 50px 30px; display: flex; flex-direction: column; }
+        .cv-photo { width: 180px; height: 180px; border-radius: 20px; border: 4px solid var(--secondary); margin-bottom: 30px; object-fit: cover; align-self: center; }
 
         .cv-header-area { background: linear-gradient(135deg, #1e293b, #334155); padding: 70px 40px; color: white; }
-        .cv-header-area h1 { font-family: 'Almarai', sans-serif; font-size: 50px; margin: 0; }
-        .cv-header-area p { font-size: 22px; color: var(--secondary); font-weight: 700; }
+        .cv-header-area h1 { font-family: 'Almarai', sans-serif; font-size: 55px; margin: 0; }
+        .cv-header-area p { font-size: 24px; color: var(--secondary); font-weight: 700; margin-top: 5px; }
 
         .cv-main { padding-right: 25px; }
-        .cv-section { padding: 25px 40px; }
-        .cv-title { font-size: 20px; font-weight: 900; color: var(--primary); border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-        .cv-text { font-size: 14px; line-height: 1.7; color: #334155; white-space: pre-line; }
+        .cv-section { padding: 30px 45px; }
+        .cv-title { font-size: 22px; font-weight: 900; color: var(--primary); border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .cv-text { font-size: 15px; line-height: 1.8; color: #334155; white-space: pre-line; }
 
-        .s-title { font-size: 18px; font-weight: 900; color: var(--secondary); margin: 20px 0 10px; border-right: 4px solid var(--secondary); padding-right: 10px; }
-        [dir="ltr"] .s-title { border-right: none; border-left: 4px solid var(--secondary); padding-left: 10px; padding-right: 0; }
-        .s-content { font-size: 13px; line-height: 1.7; color: #cbd5e1; }
+        .s-title { font-size: 19px; font-weight: 900; color: var(--secondary); margin: 25px 0 10px; border-right: 4px solid var(--secondary); padding-right: 10px; }
+        [dir="ltr"] .s-title { border-right: none; border-left: 4px solid var(--secondary); padding-left: 10px; }
+        .s-content { font-size: 14px; line-height: 1.8; color: #cbd5e1; }
     </style>
 </head>
 <body dir="rtl">
 
-    <div class="lang-switcher" onclick="toggleLanguage()" id="langBtn">English</div>
+    <div class="bubbles-container">
+        <div class="bubble" style="width: 80px; height: 80px; left: 10%;"></div>
+        <div class="bubble" style="width: 100px; height: 100px; left: 80%; animation-delay: 2s;"></div>
+    </div>
 
     <header>
-        <div class="brand-logo"><i class="fas fa-pen-nib"></i><span>CVForge</span></div>
-        <div id="tagline" class="brand-tagline">اصنع سيرة ذاتية تليق بمستقبلك المهني</div>
+        <div class="brand-logo"><i class="fas fa-pen-nib"></i><span>CVForge Builder</span></div>
+        <div class="brand-tagline">مستشارك الذكي لسيرة ذاتية عالمية</div>
     </header>
 
     <div class="app-container">
         <div class="card-editor">
-            <div class="input-box"><label id="l-name">الاسم الكامل</label><input type="text" id="inName"></div>
-            <div class="input-box"><label id="l-job">المسمى الوظيفي</label><input type="text" id="inJob"></div>
-            <div class="input-box"><label id="l-photo">الصورة الشخصية</label><input type="file" id="inPhoto"></div>
+            
+            <div class="culture-box">
+                <label>🗺️ اختر ثقافة العمل (لتكييف القالب):</label>
+                <div class="culture-grid">
+                    <button class="c-btn active" id="c-ar" onclick="setCulture('ar')">الخليج/عربي</button>
+                    <button class="c-btn" id="c-us" onclick="setCulture('us')">أمريكا (ATS)</button>
+                    <button class="c-btn" id="c-eu" onclick="setCulture('eu')">أوروبا (UK)</button>
+                </div>
+            </div>
+
+            <div class="input-box"><label>الاسم الكامل</label><input type="text" id="inName" placeholder="أدخل اسمك"></div>
+            <div class="input-box"><label>المسمى الوظيفي</label><input type="text" id="inJob" placeholder="مثال: مدير مشاريع"></div>
+            <div class="input-box"><label>الصورة الشخصية</label><input type="file" id="inPhoto"></div>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <div class="input-box"><label id="l-phone">الهاتف</label><input type="text" id="inPhone"></div>
-                <div class="input-box"><label id="l-email">الايميل</label><input type="email" id="inEmail"></div>
+                <div class="input-box"><label>رقم الهاتف</label><input type="text" id="inPhone"></div>
+                <div class="input-box"><label>البريد الإلكتروني</label><input type="email" id="inEmail"></div>
             </div>
 
             <div class="input-box"><label id="l-about">النبذة الشخصية</label><textarea id="inAbout" rows="3"></textarea></div>
-            <div class="input-box"><label id="l-exp">الخبرات العملية</label><textarea id="inExp" rows="4"></textarea></div>
-            <div class="input-box"><label id="l-awards">الإنجازات</label><textarea id="inAwards" rows="3"></textarea></div>
+            <div class="input-box"><label id="l-exp">الخبرات المهنية</label><textarea id="inExp" rows="5"></textarea></div>
+            <div class="input-box"><label id="l-awards">الإنجازات والمشاريع</label><textarea id="inAwards" rows="3"></textarea></div>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <div class="input-box"><label id="l-edu">التعليم</label><textarea id="inEdu" rows="3"></textarea></div>
-                <div class="input-box"><label id="l-lang">اللغات</label><textarea id="inLang" rows="3"></textarea></div>
+                <div class="input-box"><label>التعليم</label><textarea id="inEdu" rows="3"></textarea></div>
+                <div class="input-box"><label>اللغات</label><textarea id="inLang" rows="3"></textarea></div>
             </div>
+            
+            <div class="input-box"><label>المهارات</label><input type="text" id="inSkills"></div>
 
-            <button class="btn-create" onclick="generateCV()" id="btn-text">تحميل الـ PDF</button>
+            <button class="btn-create" onclick="generateCV()">
+                <i class="fas fa-magic"></i> استخراج وتكييف السيرة الذاتية
+            </button>
         </div>
     </div>
 
@@ -118,28 +129,34 @@
         <div id="final-document" class="cv-document">
             <div class="cv-sidebar">
                 <img id="outPhoto" class="cv-photo" src="">
-                <div class="s-title" id="out-l-contact">التواصل</div>
+                <div class="s-title" id="side-contact">التواصل</div>
                 <div id="outContact" class="s-content"></div>
-                <div class="s-title" id="out-l-edu">التعليم</div>
+                <div class="s-title" id="side-edu">التعليم</div>
                 <div id="outEdu" class="s-content"></div>
-                <div class="s-title" id="out-l-lang">اللغات</div>
+                <div class="s-title" id="side-lang">اللغات</div>
                 <div id="outLang" class="s-content"></div>
+                <div class="s-title" id="side-skills">المهارات</div>
+                <div id="outSkills" class="s-content"></div>
             </div>
+            
             <div class="cv-main">
                 <div class="cv-header-area">
                     <h1 id="outName"></h1>
                     <p id="outJob"></p>
                 </div>
+                
                 <div class="cv-section">
-                    <div class="cv-title"><i class="fas fa-user"></i> <span id="out-l-about">النبذة الشخصية</span></div>
+                    <div class="cv-title"><i class="fas fa-user-circle"></i> <span id="out-l-about">النبذة الشخصية</span></div>
                     <div id="outAbout" class="cv-text"></div>
                 </div>
+
                 <div class="cv-section">
-                    <div class="cv-title"><i class="fas fa-trophy"></i> <span id="out-l-awards">الإنجازات</span></div>
+                    <div class="cv-title"><i class="fas fa-trophy"></i> <span id="out-l-awards">الإنجازات والمشاريع</span></div>
                     <div id="outAwards" class="cv-text"></div>
                 </div>
+
                 <div class="cv-section">
-                    <div class="cv-title"><i class="fas fa-briefcase"></i> <span id="out-l-exp">الخبرة العملية</span></div>
+                    <div class="cv-title"><i class="fas fa-briefcase"></i> <span id="out-l-exp">المسيرة المهنية</span></div>
                     <div id="outExp" class="cv-text"></div>
                 </div>
             </div>
@@ -147,50 +164,35 @@
     </div>
 
     <script>
-        let currentLang = 'ar';
-        const translations = {
-            ar: {
-                langBtn: "English", tagline: "اصنع سيرة ذاتية تليق بمستقبلك المهني",
-                name: "الاسم الكامل", job: "المسمى الوظيفي", photo: "الصورة الشخصية", phone: "الهاتف", email: "الايميل",
-                about: "النبذة الشخصية", exp: "الخبرات العملية", awards: "الإنجازات", edu: "التعليم", lang: "اللغات",
-                btn: "تحميل الـ PDF", contact: "التواصل"
-            },
-            en: {
-                langBtn: "العربية", tagline: "Create a professional CV in minutes",
-                name: "Full Name", job: "Job Title", photo: "Profile Photo", phone: "Phone", email: "Email",
-                about: "Profile Summary", exp: "Work Experience", awards: "Achievements", edu: "Education", lang: "Languages",
-                btn: "Download PDF", contact: "Contact"
-            }
+        let currentCulture = 'ar';
+
+        const cultures = {
+            ar: { dir: 'rtl', about: 'النبذة الشخصية', exp: 'الخبرات المهنية', awards: 'الإنجازات والمشاريع', contact: 'التواصل', edu: 'التعليم', lang: 'اللغات', skills: 'المهارات' },
+            us: { dir: 'ltr', about: 'Professional Summary', exp: 'Work Experience', awards: 'Key Achievements', contact: 'Contact Info', edu: 'Education', lang: 'Languages', skills: 'Core Competencies' },
+            eu: { dir: 'ltr', about: 'Personal Profile', exp: 'Professional History', awards: 'Projects & Awards', contact: 'Contact', edu: 'Academic Background', lang: 'Language Skills', skills: 'Key Skills' }
         };
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            const dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+        function setCulture(type) {
+            currentCulture = type;
+            document.querySelectorAll('.c-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`c-${type}`).classList.add('active');
             
-            document.body.dir = dir;
-            document.getElementById('final-document').dir = dir;
-            document.getElementById('langBtn').innerText = translations[currentLang].langBtn;
-            document.getElementById('tagline').innerText = translations[currentLang].tagline;
-            document.getElementById('btn-text').innerText = translations[currentLang].btn;
+            const c = cultures[type];
+            document.getElementById('mainHtml').dir = c.dir;
+            document.getElementById('final-document').dir = c.dir;
             
-            // ترجمة اللابلات
-            document.getElementById('l-name').innerText = translations[currentLang].name;
-            document.getElementById('l-job').innerText = translations[currentLang].job;
-            document.getElementById('l-phone').innerText = translations[currentLang].phone;
-            document.getElementById('l-email').innerText = translations[currentLang].email;
-            document.getElementById('l-about').innerText = translations[currentLang].about;
-            document.getElementById('l-exp').innerText = translations[currentLang].exp;
-            document.getElementById('l-awards').innerText = translations[currentLang].awards;
-            document.getElementById('l-edu').innerText = translations[currentLang].edu;
-            document.getElementById('l-lang').innerText = translations[currentLang].lang;
-
-            // ترجمة عناوين الـ PDF
-            document.getElementById('out-l-contact').innerText = translations[currentLang].contact;
-            document.getElementById('out-l-edu').innerText = translations[currentLang].edu;
-            document.getElementById('out-l-lang').innerText = translations[currentLang].lang;
-            document.getElementById('out-l-about').innerText = translations[currentLang].about;
-            document.getElementById('out-l-awards').innerText = translations[currentLang].awards;
-            document.getElementById('out-l-exp').innerText = translations[currentLang].exp;
+            // تحديث العناوين في الواجهة والـ PDF
+            document.getElementById('l-about').innerText = c.about;
+            document.getElementById('l-exp').innerText = c.exp;
+            document.getElementById('l-awards').innerText = c.awards;
+            
+            document.getElementById('out-l-about').innerText = c.about;
+            document.getElementById('out-l-exp').innerText = c.exp;
+            document.getElementById('out-l-awards').innerText = c.awards;
+            document.getElementById('side-contact').innerText = c.contact;
+            document.getElementById('side-edu').innerText = c.edu;
+            document.getElementById('side-lang').innerText = c.lang;
+            document.getElementById('side-skills').innerText = c.skills;
         }
 
         document.getElementById('inPhoto').onchange = e => {
@@ -200,20 +202,21 @@
         };
 
         async function generateCV() {
-            document.getElementById('outName').innerText = document.getElementById('inName').value || "Name";
-            document.getElementById('outJob').innerText = document.getElementById('inJob').value || "Position";
-            document.getElementById('outContact').innerText = `${document.getElementById('inPhone').value}\n${document.getElementById('inEmail').value}`;
+            document.getElementById('outName').innerText = document.getElementById('inName').value || "Full Name";
+            document.getElementById('outJob').innerText = document.getElementById('inJob').value || "Job Position";
+            document.getElementById('outContact').innerText = `📞 ${document.getElementById('inPhone').value}\n✉️ ${document.getElementById('inEmail').value}`;
             document.getElementById('outAbout').innerText = document.getElementById('inAbout').value;
             document.getElementById('outExp').innerText = document.getElementById('inExp').value;
             document.getElementById('outEdu').innerText = document.getElementById('inEdu').value;
             document.getElementById('outLang').innerText = document.getElementById('inLang').value;
             document.getElementById('outAwards').innerText = document.getElementById('inAwards').value;
+            document.getElementById('outSkills').innerText = document.getElementById('inSkills').value;
 
             const element = document.getElementById('final-document');
             const canvas = await html2canvas(element, { scale: 4, useCORS: true });
             const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
             pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
-            pdf.save('CVForge_Professional.pdf');
+            pdf.save(`CVForge_${currentCulture}_Edition.pdf`);
         }
     </script>
 </body>

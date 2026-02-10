@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CVForge AI | Pro Edition</title>
+    <title>CVForge AI | Elite Edition</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -18,7 +18,7 @@
             --bg-site: #f8fafc;
         }
 
-        body { margin: 0; background: var(--bg-site); font-family: 'Cairo', sans-serif; transition: 0.4s; }
+        body { margin: 0; background: var(--bg-site); font-family: 'Cairo', sans-serif; transition: 0.4s; padding-bottom: 50px; }
 
         header { 
             background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
@@ -29,50 +29,75 @@
         .brand-logo span { background: linear-gradient(to left, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         .app-container { width: 100%; max-width: 600px; margin: 20px auto; padding: 0 15px; }
-        .card-editor { background: white; padding: 25px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-
-        /* مغير الألوان */
-        .theme-box { background: #f0f7ff; padding: 15px; border-radius: 20px; margin-bottom: 20px; border: 1px dashed var(--primary); }
-        .theme-grid { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
-        .t-dot { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 3px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.1); transition: 0.3s; }
-        .t-dot:hover { transform: scale(1.2); }
-        .t-active { border-color: #334155; transform: scale(1.1); }
+        .card-editor { background: white; padding: 25px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
 
         .input-box { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 700; color: #475569; }
         input, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #f1f5f9; font-family: inherit; box-sizing: border-box; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--primary); }
+        input:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); }
 
-        .btn-create { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; border-radius: 15px; color: white; font-weight: 900; font-size: 18px; cursor: pointer; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2); margin-top: 10px; }
+        /* مغير الألوان الأنيق */
+        .theme-selector { margin: 25px 0 15px; text-align: center; background: #fdfdfd; padding: 15px; border-radius: 20px; border: 1px solid #eee; }
+        .theme-grid { display: flex; gap: 15px; justify-content: center; margin-top: 10px; }
+        .t-dot { width: 35px; height: 35px; border-radius: 12px; cursor: pointer; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s; }
+        .t-dot:hover { transform: translateY(-5px); }
+        .t-active { border-color: #334155; transform: scale(1.1); box-shadow: 0 0 15px var(--primary); }
+
+        /* زر التحميل الفاخر */
+        .download-wrapper { position: relative; margin-top: 20px; }
+        .btn-luxury { 
+            width: 100%; padding: 20px; 
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%); 
+            border: none; border-radius: 20px; color: white; 
+            font-weight: 900; font-size: 18px; cursor: pointer; 
+            box-shadow: 0 15px 30px rgba(30, 41, 59, 0.2);
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            transition: 0.4s; position: relative; overflow: hidden;
+        }
+        .btn-luxury:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(30, 41, 59, 0.3); }
+        .btn-luxury:active { transform: scale(0.98); }
+        
+        /* عداد التحميل */
+        .loader-bar { position: absolute; bottom: 0; left: 0; height: 4px; background: var(--secondary); width: 0%; transition: 0.2s; }
+        
+        #status-msg { text-align: center; margin-top: 15px; font-weight: bold; font-size: 14px; min-height: 20px; transition: 0.3s; }
+        .success-text { color: #10b981; }
 
         footer { text-align: center; padding: 40px 20px; }
-        .btn-clear-footer { background: none; border: none; color: #ef4444; font-weight: bold; cursor: pointer; text-decoration: underline; font-size: 14px; }
+        .btn-clear-footer { background: none; border: none; color: #94a3b8; font-size: 13px; cursor: pointer; text-decoration: underline; }
 
         /* --- PDF Design --- */
         #pdf-hideout { position: absolute; left: -9999px; top: 0; }
         .cv-document { width: 210mm; height: 297mm; background: white; display: grid; grid-template-columns: 260px 1fr; }
         .cv-sidebar { background: #0f172a; color: white; padding: 40px 25px; }
-        .cv-photo { width: 160px; height: 160px; border-radius: 20px; border: 4px solid var(--secondary); margin-bottom: 25px; object-fit: cover; align-self: center; display: block; margin-left: auto; margin-right: auto; }
-        .cv-header-area { background: #1e293b; padding: 60px 40px; color: white; }
-        .cv-header-area h1 { font-family: 'Almarai', sans-serif; font-size: 45px; margin: 0; }
-        .cv-header-area p { font-size: 22px; color: var(--secondary); font-weight: 700; margin-top: 10px; }
-        .cv-title { font-size: 20px; font-weight: 900; color: var(--primary); border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-        .cv-text { font-size: 14px; line-height: 1.7; color: #334155; white-space: pre-line; padding: 0 40px; margin-bottom: 20px; }
-        .s-title { font-size: 18px; font-weight: 900; color: var(--secondary); margin: 20px 0 10px; border-right: 4px solid var(--secondary); padding-right: 10px; }
-        .s-content { font-size: 13px; line-height: 1.8; color: #cbd5e1; margin-bottom: 15px; }
+        .cv-photo { width: 160px; height: 160px; border-radius: 20px; border: 4px solid var(--secondary); margin-bottom: 25px; object-fit: cover; display: block; margin: 0 auto; background: #1e293b; }
+        .cv-header-area { background: var(--primary); padding: 60px 40px; color: white; }
+        .cv-title { font-size: 20px; font-weight: 900; color: var(--primary); border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin: 25px 40px 12px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="brand-logo"><i class="fas fa-file-invoice"></i><span>CVForge Pro</span></div>
+        <div class="brand-logo"><i class="fas fa-crown"></i><span>CVForge AI</span></div>
     </header>
 
     <div class="app-container">
         <div class="card-editor">
             
-            <div class="theme-box">
-                <label><i class="fas fa-palette"></i> اختر لون القالب:</label>
+            <div class="input-box"><label>الاسم الكامل</label><input type="text" id="inName" oninput="saveToLocal()"></div>
+            <div class="input-box"><label>المسمى الوظيفي</label><input type="text" id="inJob" oninput="saveToLocal()"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="input-box"><label>رقم الهاتف</label><input type="text" id="inPhone" oninput="saveToLocal()"></div>
+                <div class="input-box"><label>البريد الإلكتروني</label><input type="email" id="inEmail" oninput="saveToLocal()"></div>
+            </div>
+            <div class="input-box"><label>الصورة الشخصية</label><input type="file" id="inPhoto" accept="image/*"></div>
+            <div class="input-box"><label>النبذة الشخصية</label><textarea id="inAbout" oninput="saveToLocal()" rows="3"></textarea></div>
+            <div class="input-box"><label>الخبرات المهنية</label><textarea id="inExp" oninput="saveToLocal()" rows="4"></textarea></div>
+            <div class="input-box"><label>التعليم</label><textarea id="inEdu" oninput="saveToLocal()" rows="2"></textarea></div>
+            <div class="input-box"><label>المهارات</label><input type="text" id="inSkills" oninput="saveToLocal()"></div>
+
+            <div class="theme-selector">
+                <label><i class="fas fa-palette"></i> تخصيص لون السيرة الذاتية</label>
                 <div class="theme-grid">
                     <div class="t-dot t-active" style="background: #6366f1;" onclick="changeTheme('#6366f1', '#0ea5e9', this)"></div>
                     <div class="t-dot" style="background: #10b981;" onclick="changeTheme('#10b981', '#34d399', this)"></div>
@@ -82,94 +107,70 @@
                 </div>
             </div>
 
-            <div class="input-box"><label>الاسم الكامل</label><input type="text" id="inName" oninput="saveToLocal()"></div>
-            <div class="input-box"><label>المسمى الوظيفي</label><input type="text" id="inJob" oninput="saveToLocal()"></div>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <div class="input-box"><label>تاريخ الميلاد</label><input type="date" id="inBirth" oninput="saveToLocal()"></div>
-                <div class="input-box"><label>العنوان</label><input type="text" id="inAddress" oninput="saveToLocal()"></div>
+            <div class="download-wrapper">
+                <button class="btn-luxury" id="downloadBtn" onclick="handleDownload()">
+                    <i class="fas fa-file-pdf"></i>
+                    <span id="btnText">تحميل السيرة الذاتية PDF</span>
+                    <div class="loader-bar" id="loaderBar"></div>
+                </button>
             </div>
+            <div id="status-msg"></div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <div class="input-box"><label>رقم الهاتف</label><input type="text" id="inPhone" oninput="saveToLocal()"></div>
-                <div class="input-box"><label>البريد الإلكتروني</label><input type="email" id="inEmail" oninput="saveToLocal()"></div>
-            </div>
-
-            <div class="input-box"><label>الصورة الشخصية</label><input type="file" id="inPhoto" accept="image/*"></div>
-            <div class="input-box"><label>النبذة الشخصية</label><textarea id="inAbout" oninput="saveToLocal()" rows="3"></textarea></div>
-            <div class="input-box"><label>الخبرات المهنية</label><textarea id="inExp" oninput="saveToLocal()" rows="4"></textarea></div>
-            <div class="input-box"><label>التعليم</label><textarea id="inEdu" oninput="saveToLocal()" rows="3"></textarea></div>
-            <div class="input-box"><label>المهارات (افصل بفاصلة)</label><input type="text" id="inSkills" oninput="saveToLocal()"></div>
-
-            <button class="btn-create" onclick="generateCV()">
-                <i class="fas fa-download"></i> تحميل الـ PDF بالألوان الجديدة
-            </button>
         </div>
     </div>
 
     <footer>
-        <button class="btn-clear-footer" onclick="clearSavedData()">
-            <i class="fas fa-trash"></i> مسح جميع البيانات المخزنة والبدء من جديد
-        </button>
+        <button class="btn-clear-footer" onclick="clearSavedData()">مسح البيانات وبدء سيرة جديدة</button>
     </footer>
 
     <div id="pdf-hideout">
         <div id="final-document" class="cv-document">
-            <div class="cv-sidebar" id="sidePdf">
+            <div class="cv-sidebar">
                 <img id="outPhoto" class="cv-photo" src="">
-                <div class="s-title">التواصل</div>
-                <div id="outContact" class="s-content"></div>
-                <div class="s-title">المهارات</div>
-                <div id="outSkills" class="s-content"></div>
+                <div style="padding: 0 20px;">
+                    <h3 style="color: var(--secondary); border-bottom: 1px solid #334155; padding-bottom: 5px;">التواصل</h3>
+                    <div id="outContact" style="font-size: 13px; line-height: 2; color: #cbd5e1;"></div>
+                    <h3 style="color: var(--secondary); border-bottom: 1px solid #334155; padding-bottom: 5px; margin-top: 20px;">المهارات</h3>
+                    <div id="outSkills" style="font-size: 13px; line-height: 2; color: #cbd5e1;"></div>
+                </div>
             </div>
             <div class="cv-main">
                 <div class="cv-header-area" id="headerPdf">
-                    <h1 id="outName"></h1>
-                    <p id="outJob" class="pdf-job-color"></p>
+                    <h1 id="outName" style="margin:0;"></h1>
+                    <p id="outJob" style="margin:10px 0 0; font-weight: bold;"></p>
                 </div>
-                <div style="margin-top: 20px;">
-                    <div class="cv-title"><i class="fas fa-user"></i> النبذة الشخصية</div>
-                    <div id="outAbout" class="cv-text"></div>
-                    <div class="cv-title"><i class="fas fa-briefcase"></i> المسيرة المهنية</div>
-                    <div id="outExp" class="cv-text"></div>
-                    <div class="cv-title"><i class="fas fa-graduation-cap"></i> التعليم</div>
-                    <div id="outEdu" class="cv-text"></div>
-                </div>
+                <div class="cv-title">النبذة الشخصية</div>
+                <div id="outAbout" style="padding: 0 40px; font-size: 14px; line-height: 1.7; white-space: pre-line;"></div>
+                <div class="cv-title">الخبرات المهنية</div>
+                <div id="outExp" style="padding: 0 40px; font-size: 14px; line-height: 1.7; white-space: pre-line;"></div>
+                <div class="cv-title">التعليم الأكاديمي</div>
+                <div id="outEdu" style="padding: 0 40px; font-size: 14px; line-height: 1.7; white-space: pre-line;"></div>
             </div>
         </div>
     </div>
 
     <script>
-        const inputIds = ['inName', 'inJob', 'inBirth', 'inAddress', 'inPhone', 'inEmail', 'inAbout', 'inExp', 'inEdu', 'inSkills'];
+        const inputIds = ['inName', 'inJob', 'inPhone', 'inEmail', 'inAbout', 'inExp', 'inEdu', 'inSkills'];
 
-        // ميزة تغيير الألوان
         function changeTheme(primary, secondary, el) {
             document.documentElement.style.setProperty('--primary', primary);
             document.documentElement.style.setProperty('--secondary', secondary);
-            
-            // تحديث الشكل في الـ PDF
-            document.getElementById('headerPdf').style.background = primary;
-            document.querySelector('.pdf-job-color').style.color = secondary;
-            
-            // تمييز الزر المختار
-            document.querySelectorAll('.t-dot').forEach(dot => dot.classList.remove('t-active'));
+            document.getElementById('headerPdf').style.backgroundColor = primary;
+            document.getElementById('outJob').style.color = secondary;
+            document.querySelectorAll('.t-dot').forEach(d => d.classList.remove('t-active'));
             el.classList.add('t-active');
-            
-            // حفظ اللون المختار
             localStorage.setItem('themePrimary', primary);
             localStorage.setItem('themeSecondary', secondary);
         }
 
         window.onload = () => {
-            // استعادة البيانات
             inputIds.forEach(id => {
-                const saved = localStorage.getItem(id);
-                if (saved) document.getElementById(id).value = saved;
+                const val = localStorage.getItem(id);
+                if (val) document.getElementById(id).value = val;
             });
-            // استعادة اللون
             const p = localStorage.getItem('themePrimary');
             const s = localStorage.getItem('themeSecondary');
-            if(p && s) changeTheme(p, s, document.querySelector(`[style*="${p}"]`));
+            if(p) changeTheme(p, s, document.querySelector(`[style*="${p}"]`));
         };
 
         function saveToLocal() {
@@ -177,10 +178,7 @@
         }
 
         function clearSavedData() {
-            if(confirm("هل أنت متأكد من مسح البيانات؟")) {
-                localStorage.clear();
-                location.reload();
-            }
+            if(confirm("مسح كل البيانات؟")) { localStorage.clear(); location.reload(); }
         }
 
         document.getElementById('inPhoto').onchange = e => {
@@ -189,22 +187,48 @@
             r.readAsDataURL(e.target.files[0]);
         };
 
-        async function generateCV() {
+        async function handleDownload() {
+            const btn = document.getElementById('downloadBtn');
+            const btnText = document.getElementById('btnText');
+            const loader = document.getElementById('loaderBar');
+            const status = document.getElementById('status-msg');
+
+            // بدء العداد
+            btn.disabled = true;
+            status.innerHTML = "جاري تحضير ملفك الاحترافي...";
+            status.style.color = "#64748b";
+            
+            let progress = 0;
+            const interval = setInterval(async () => {
+                progress += 5;
+                loader.style.width = progress + "%";
+                btnText.innerText = `جاري المعالجة ${progress}%`;
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    await performPDFExport();
+                    btnText.innerText = "تحميل السيرة الذاتية PDF";
+                    loader.style.width = "0%";
+                    btn.disabled = false;
+                    status.innerHTML = '<i class="fas fa-check-circle"></i> تم التحميل بنجاح!';
+                    status.className = "success-text";
+                }
+            }, 50);
+        }
+
+        async function performPDFExport() {
             document.getElementById('outName').innerText = document.getElementById('inName').value || "الاسم الكامل";
             document.getElementById('outJob').innerText = document.getElementById('inJob').value || "المسمى الوظيفي";
             document.getElementById('outAbout').innerText = document.getElementById('inAbout').value;
             document.getElementById('outExp').innerText = document.getElementById('inExp').value;
             document.getElementById('outEdu').innerText = document.getElementById('inEdu').value;
             document.getElementById('outSkills').innerText = document.getElementById('inSkills').value;
+            document.getElementById('outContact').innerText = `${document.getElementById('inPhone').value}\n${document.getElementById('inEmail').value}`;
 
-            const contact = `${document.getElementById('inPhone').value}\n${document.getElementById('inEmail').value}\n${document.getElementById('inAddress').value}`;
-            document.getElementById('outContact').innerText = contact;
-
-            const element = document.getElementById('final-document');
-            const canvas = await html2canvas(element, { scale: 3 });
+            const canvas = await html2canvas(document.getElementById('final-document'), { scale: 3 });
             const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
             pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
-            pdf.save("My_Pro_CV.pdf");
+            pdf.save("Professional_CV.pdf");
         }
     </script>
 </body>

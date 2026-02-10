@@ -1,258 +1,223 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="mainHtml">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CVForge AI | World Class Edition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVForge AI | Platinum Edition</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
-        :root { --primary: #6366f1; --secondary: #0ea5e9; --bg-site: #f8fafc; }
-        body { margin: 0; background: var(--bg-site); font-family: 'Cairo', sans-serif; transition: 0.4s; padding-bottom: 50px; }
+        :root { --primary: #1a5f7a; --secondary: #0ea5e9; --text-dark: #1e293b; --text-light: #64748b; }
+        body { margin: 0; background: #f1f5f9; font-family: 'Cairo', sans-serif; transition: 0.4s; }
 
-        header { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); padding: 20px; text-align: center; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100; }
-        .brand-logo { font-size: 26px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .brand-logo i { color: var(--primary); }
-        .brand-logo span { background: linear-gradient(to left, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* الواجهة الأمامية (المحرر) */
+        header { background: white; padding: 15px; text-align: center; border-bottom: 2px solid var(--primary); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .app-container { max-width: 700px; margin: 30px auto; padding: 0 15px; }
+        .editor-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        
+        .input-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); font-size: 14px; }
+        input, textarea { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; font-family: inherit; outline: none; transition: 0.3s; box-sizing: border-box; }
+        input:focus { border-color: var(--primary); background: #f8fafc; }
 
-        .app-container { width: 100%; max-width: 650px; margin: 20px auto; padding: 0 15px; }
-        .card-editor { background: white; padding: 25px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
+        .theme-panel { background: #f8fafc; padding: 15px; border-radius: 15px; margin: 20px 0; border: 1px solid #e2e8f0; text-align: center; }
+        .color-dots { display: flex; justify-content: center; gap: 15px; margin-top: 10px; }
+        .dot { width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 3px solid white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; }
+        .dot.active { transform: scale(1.2); border-color: #334155; }
 
-        .input-box { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 700; color: #475569; }
-        input, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #f1f5f9; font-family: inherit; box-sizing: border-box; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); }
-
-        .theme-selector { margin: 25px 0 15px; text-align: center; background: #fdfdfd; padding: 15px; border-radius: 20px; border: 1px solid #eee; }
-        .theme-grid { display: flex; gap: 15px; justify-content: center; margin-top: 10px; }
-        .t-dot { width: 35px; height: 35px; border-radius: 12px; cursor: pointer; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s; }
-        .t-active { border-color: #334155; transform: scale(1.1); box-shadow: 0 0 15px var(--primary); }
-
-        .btn-luxury { 
-            width: 100%; padding: 20px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); 
-            border: none; border-radius: 20px; color: white; font-weight: 900; font-size: 18px; cursor: pointer; 
-            display: flex; align-items: center; justify-content: center; gap: 12px; transition: 0.4s; position: relative; overflow: hidden;
+        .btn-download { 
+            width: 100%; padding: 20px; background: var(--primary); color: white; border: none; 
+            border-radius: 15px; font-size: 18px; font-weight: 900; cursor: pointer; 
+            position: relative; overflow: hidden; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        .loader-bar { position: absolute; bottom: 0; left: 0; height: 4px; background: var(--secondary); width: 0%; transition: 0.2s; }
-        #status-msg { text-align: center; margin-top: 15px; font-weight: bold; font-size: 14px; min-height: 20px; }
+        .btn-download:hover { opacity: 0.9; transform: translateY(-2px); }
+        .progress-line { position: absolute; bottom: 0; left: 0; height: 5px; background: var(--secondary); width: 0%; transition: 0.2s; }
 
-        footer { text-align: center; padding: 40px 20px; }
-        .btn-clear-footer { background: none; border: none; color: #94a3b8; font-size: 13px; cursor: pointer; text-decoration: underline; }
-
-        /* --- Global PDF Design (World Class) --- */
+        /* --- تصميم الـ PDF عالي الدقة (مثل الصورة) --- */
         #pdf-hideout { position: absolute; left: -9999px; top: 0; }
-        .cv-document { width: 210mm; height: 297mm; background: #ffffff; color: #1a1a1a; display: flex; flex-direction: column; position: relative; }
+        .cv-page { width: 210mm; height: 297mm; background: white; position: relative; display: flex; flex-direction: column; }
         
-        .cv-top-stripe { height: 12px; background: linear-gradient(to right, var(--primary), var(--secondary)); width: 100%; }
+        .cv-header { background: var(--primary); height: 220px; width: 100%; position: relative; display: flex; align-items: center; padding: 0 60px; color: white; box-sizing: border-box; }
+        .cv-header-content { flex: 1; }
+        .cv-header-content h1 { font-family: 'Almarai'; font-size: 45px; margin: 0; font-weight: 800; letter-spacing: -1px; }
+        .cv-header-content p { font-size: 22px; opacity: 0.9; margin: 5px 0 0; font-weight: 400; }
         
-        .cv-header { display: flex; align-items: center; gap: 40px; padding: 60px 60px 40px; }
-        .cv-photo-circle { width: 140px; height: 140px; border-radius: 50%; border: 6px solid #f1f5f9; object-fit: cover; }
-        .cv-header-text h1 { font-family: 'Almarai'; font-size: 42px; margin: 0; color: #0f172a; }
-        .cv-header-text p { font-size: 20px; color: var(--primary); font-weight: 700; margin: 5px 0 0; }
+        .photo-frame { width: 180px; height: 180px; border-radius: 50%; border: 8px solid white; overflow: hidden; position: absolute; left: 60px; top: 50%; transform: translateY(-50%); background: #eee; }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
 
-        .cv-content-grid { display: grid; grid-template-columns: 280px 1fr; gap: 40px; padding: 0 60px; flex-grow: 1; }
+        .cv-body { display: grid; grid-template-columns: 1fr 320px; flex: 1; }
         
-        /* Side Card Design */
-        .cv-side-card { background: #f8fafc; border-radius: 25px; padding: 30px; border: 1px solid #e2e8f0; height: fit-content; }
-        .side-sec-title { font-size: 16px; font-weight: 800; color: #475569; letter-spacing: 1px; margin-bottom: 15px; text-transform: uppercase; border-right: 3px solid var(--secondary); padding-right: 10px; }
-        .side-item { font-size: 14px; margin-bottom: 12px; color: #334155; display: flex; align-items: center; gap: 10px; }
-        .side-item i { color: var(--primary); font-size: 12px; }
+        /* العمود الأيمن (الرئيسي) */
+        .main-col { padding: 40px 50px 40px 30px; }
+        .sec-title { display: flex; align-items: center; gap: 12px; color: var(--primary); font-size: 20px; font-weight: 800; margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+        .sec-title i { font-size: 18px; }
+        .entry-box { margin-bottom: 25px; position: relative; padding-right: 20px; border-right: 2px solid #f1f5f9; }
+        .entry-box::before { content: ""; position: absolute; right: -6px; top: 8px; width: 10px; height: 10px; background: var(--primary); border-radius: 50%; }
+        .entry-text { font-size: 15px; color: #334155; line-height: 1.7; white-space: pre-line; }
 
-        /* Main Sections Design */
-        .main-sec-box { margin-bottom: 35px; }
-        .main-sec-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .main-sec-header h2 { font-size: 20px; font-weight: 900; color: #0f172a; margin: 0; }
-        .main-sec-header .line { flex-grow: 1; height: 2px; background: #f1f5f9; }
-        .main-sec-body { font-size: 15px; line-height: 1.8; color: #334155; white-space: pre-line; }
-
-        .cv-footer-ornament { position: absolute; bottom: 0; right: 0; width: 250px; height: 250px; background: linear-gradient(135deg, transparent 70%, var(--primary)); opacity: 0.05; border-radius: 100% 0 0 0; }
+        /* العمود الأيسر (الجانبي) */
+        .side-col { background: #f8fafc; padding: 40px 30px; border-right: 1px solid #e2e8f0; }
+        .side-title { background: var(--primary); color: white; padding: 8px 20px; border-radius: 20px; font-size: 16px; font-weight: 700; margin-bottom: 20px; text-align: center; }
+        .info-item { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; color: #475569; font-size: 14px; }
+        .info-item i { color: var(--primary); width: 20px; text-align: center; }
+        
+        .skill-tag { background: white; border: 1px solid #e2e8f0; padding: 5px 15px; border-radius: 8px; display: inline-block; margin: 0 0 8px 8px; font-size: 13px; font-weight: 600; color: var(--primary); }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="brand-logo"><i class="fas fa-globe"></i><span>CVForge AI Elite</span></div>
+        <div style="font-size: 24px; font-weight: 900; color: var(--primary);">
+            <i class="fas fa-gem"></i> CVForge <span style="color: var(--secondary);">Platinum</span>
+        </div>
     </header>
 
     <div class="app-container">
-        <div class="card-editor">
-            <div class="input-box"><label>الاسم الكامل</label><input type="text" id="inName" oninput="saveToLocal()" placeholder="محمد حسن صالح"></div>
-            <div class="input-box"><label>المسمى الوظيفي</label><input type="text" id="inJob" oninput="saveToLocal()" placeholder="مدير مطعم"></div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <div class="input-box"><label>رقم الهاتف</label><input type="text" id="inPhone" oninput="saveToLocal()"></div>
-                <div class="input-box"><label>البريد الإلكتروني</label><input type="email" id="inEmail" oninput="saveToLocal()"></div>
+        <div class="editor-card">
+            <div class="input-group"><label>الاسم الكامل</label><input type="text" id="inName" oninput="saveData()" placeholder="مثال: محمد مراد"></div>
+            <div class="input-group"><label>المسمى الوظيفي</label><input type="text" id="inJob" oninput="saveData()" placeholder="مثال: مصمم جرافيك"></div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="input-group"><label>الهاتف</label><input type="text" id="inPhone" oninput="saveData()"></div>
+                <div class="input-group"><label>البريد الإلكتروني</label><input type="email" id="inEmail" oninput="saveData()"></div>
             </div>
-            <div class="input-box"><label>الصورة الشخصية</label><input type="file" id="inPhoto" accept="image/*"></div>
-            <div class="input-box"><label>النبذة الشخصية</label><textarea id="inAbout" oninput="saveToLocal()" rows="3"></textarea></div>
-            <div class="input-box"><label>الخبرات المهنية</label><textarea id="inExp" oninput="saveToLocal()" rows="4"></textarea></div>
-            <div class="input-box"><label>التعليم</label><textarea id="inEdu" oninput="saveToLocal()" rows="2"></textarea></div>
-            <div class="input-box"><label>المهارات (افصل بفاصلة)</label><input type="text" id="inSkills" oninput="saveToLocal()"></div>
 
-            <div class="theme-selector">
-                <label><i class="fas fa-palette"></i> اختيار الطابع اللوني:</label>
-                <div class="theme-grid">
-                    <div class="t-dot t-active" style="background: #6366f1;" onclick="changeTheme('#6366f1', '#0ea5e9', this)"></div>
-                    <div class="t-dot" style="background: #10b981;" onclick="changeTheme('#10b981', '#34d399', this)"></div>
-                    <div class="t-dot" style="background: #1e293b;" onclick="changeTheme('#1e293b', '#64748b', this)"></div>
-                    <div class="t-dot" style="background: #ef4444;" onclick="changeTheme('#ef4444', '#f87171', this)"></div>
+            <div class="input-group"><label>الصورة الشخصية</label><input type="file" id="inPhoto" accept="image/*"></div>
+            <div class="input-group"><label>لمحة شخصية (Summary)</label><textarea id="inAbout" oninput="saveData()" rows="4"></textarea></div>
+            <div class="input-group"><label>الخبرة المهنية</label><textarea id="inExp" oninput="saveData()" rows="5"></textarea></div>
+            <div class="input-group"><label>التعليم</label><textarea id="inEdu" oninput="saveData()" rows="3"></textarea></div>
+            <div class="input-group"><label>المهارات (افصل بينها بفاصلة)</label><input type="text" id="inSkills" oninput="saveData()"></div>
+
+            <div class="theme-panel">
+                <label>اختر هوية اللون المفضلة</label>
+                <div class="color-dots">
+                    <div class="dot active" style="background: #1a5f7a;" onclick="setTheme('#1a5f7a', this)"></div>
+                    <div class="dot" style="background: #1e293b;" onclick="setTheme('#1e293b', this)"></div>
+                    <div class="dot" style="background: #7c3aed;" onclick="setTheme('#7c3aed', this)"></div>
+                    <div class="dot" style="background: #059669;" onclick="setTheme('#059669', this)"></div>
                 </div>
             </div>
 
-            <div class="download-wrapper">
-                <button class="btn-luxury" id="downloadBtn" onclick="handleDownload()">
-                    <i class="fas fa-file-pdf"></i>
-                    <span id="btnText">توليد السيرة الذاتية العالمية</span>
-                    <div class="loader-bar" id="loaderBar"></div>
-                </button>
-            </div>
-            <div id="status-msg"></div>
+            <button class="btn-download" id="dlBtn" onclick="generatePDF()">
+                <i class="fas fa-file-export"></i>
+                <span id="btnText">توليد السيرة الذاتية بدقة عالية</span>
+                <div class="progress-line" id="pLine"></div>
+            </button>
+            <p id="status" style="text-align:center; font-weight:700; margin-top:15px;"></p>
         </div>
     </div>
 
-    <footer>
-        <button class="btn-clear-footer" onclick="clearSavedData()">إعادة ضبط البيانات</button>
-    </footer>
-
     <div id="pdf-hideout">
-        <div id="final-document" class="cv-document">
-            <div class="cv-top-stripe"></div>
-            
-            <div class="cv-header">
-                <img id="outPhoto" class="cv-photo-circle" src="">
-                <div class="cv-header-text">
+        <div id="cv-target" class="cv-page">
+            <div class="cv-header" id="pdfHeader">
+                <div class="cv-header-content">
                     <h1 id="outName"></h1>
                     <p id="outJob"></p>
                 </div>
-            </div>
-
-            <div class="cv-content-grid">
-                <div class="cv-side-card">
-                    <div class="side-sec-title">التواصل</div>
-                    <div id="outContact" class="s-content"></div>
-                    
-                    <div class="side-sec-title" style="margin-top:30px">المهارات</div>
-                    <div id="outSkills" class="s-content"></div>
-                </div>
-
-                <div class="cv-main">
-                    <div class="main-sec-box">
-                        <div class="main-sec-header">
-                            <h2>النبذة المهنية</h2>
-                            <div class="line"></div>
-                        </div>
-                        <div id="outAbout" class="main-sec-body"></div>
-                    </div>
-
-                    <div class="main-sec-box">
-                        <div class="main-sec-header">
-                            <h2>الخبرات العملية</h2>
-                            <div class="line"></div>
-                        </div>
-                        <div id="outExp" class="main-sec-body"></div>
-                    </div>
-
-                    <div class="main-sec-box">
-                        <div class="main-sec-header">
-                            <h2>التحصيل الدراسي</h2>
-                            <div class="line"></div>
-                        </div>
-                        <div id="outEdu" class="main-sec-body"></div>
-                    </div>
+                <div class="photo-frame">
+                    <img id="outPhoto" src="">
                 </div>
             </div>
 
-            <div class="cv-footer-ornament"></div>
+            <div class="cv-body">
+                <div class="main-col">
+                    <div class="sec-title"><i class="fas fa-briefcase"></i> الخبرة المهنية</div>
+                    <div class="entry-box"><div id="outExp" class="entry-text"></div></div>
+
+                    <div class="sec-title" style="margin-top:40px;"><i class="fas fa-graduation-cap"></i> التعليم</div>
+                    <div class="entry-box"><div id="outEdu" class="entry-text"></div></div>
+                </div>
+
+                <div class="side-col">
+                    <div class="side-title">لمحة شخصية</div>
+                    <div id="outAbout" style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 30px;"></div>
+
+                    <div class="side-title">التواصل</div>
+                    <div class="info-item"><i class="fas fa-phone"></i> <span id="outPhone"></span></div>
+                    <div class="info-item" style="word-break: break-all;"><i class="fas fa-envelope"></i> <span id="outEmail"></span></div>
+
+                    <div class="side-title" style="margin-top:30px;">المهارات</div>
+                    <div id="outSkills"></div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        const inputIds = ['inName', 'inJob', 'inPhone', 'inEmail', 'inAbout', 'inExp', 'inEdu', 'inSkills'];
+        const fields = ['inName', 'inJob', 'inPhone', 'inEmail', 'inAbout', 'inExp', 'inEdu', 'inSkills'];
 
-        function changeTheme(p, s, el) {
-            document.documentElement.style.setProperty('--primary', p);
-            document.documentElement.style.setProperty('--secondary', s);
-            document.querySelectorAll('.t-dot').forEach(d => d.classList.remove('t-active'));
-            el.classList.add('t-active');
-            localStorage.setItem('themePrimary', p);
-            localStorage.setItem('themeSecondary', s);
+        function setTheme(color, el) {
+            document.documentElement.style.setProperty('--primary', color);
+            document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+            el.classList.add('active');
+            localStorage.setItem('prefColor', color);
         }
 
         window.onload = () => {
-            inputIds.forEach(id => {
-                const val = localStorage.getItem(id);
-                if (val) document.getElementById(id).value = val;
+            fields.forEach(f => {
+                const val = localStorage.getItem(f);
+                if(val) document.getElementById(f).value = val;
             });
-            const p = localStorage.getItem('themePrimary');
-            const s = localStorage.getItem('themeSecondary');
-            if(p) changeTheme(p, s, document.querySelector(`[style*="${p}"]`));
+            const savedColor = localStorage.getItem('prefColor');
+            if(savedColor) setTheme(savedColor, document.querySelector(`[style*="${savedColor}"]`));
         };
 
-        function saveToLocal() {
-            inputIds.forEach(id => localStorage.setItem(id, document.getElementById(id).value));
-        }
-
-        function clearSavedData() {
-            if(confirm("مسح؟")) { localStorage.clear(); location.reload(); }
+        function saveData() {
+            fields.forEach(f => localStorage.setItem(f, document.getElementById(f).value));
         }
 
         document.getElementById('inPhoto').onchange = e => {
-            const r = new FileReader();
-            r.onload = () => document.getElementById('outPhoto').src = r.result;
-            r.readAsDataURL(e.target.files[0]);
+            const reader = new FileReader();
+            reader.onload = () => document.getElementById('outPhoto').src = reader.result;
+            reader.readAsDataURL(e.target.files[0]);
         };
 
-        async function handleDownload() {
-            const btn = document.getElementById('downloadBtn');
-            const btnText = document.getElementById('btnText');
-            const loader = document.getElementById('loaderBar');
-            const status = document.getElementById('status-msg');
-
-            btn.disabled = true;
-            status.innerHTML = "جاري بناء سيرة ذاتية عالمية...";
-            status.style.color = "#6366f1";
+        async function generatePDF() {
+            const btn = document.getElementById('dlBtn');
+            const bar = document.getElementById('pLine');
+            const status = document.getElementById('status');
             
-            let progress = 0;
-            const interval = setInterval(async () => {
-                progress += 10;
-                loader.style.width = progress + "%";
-                btnText.innerText = `تحضير ${progress}%`;
-
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    await performPDFExport();
-                    btnText.innerText = "توليد السيرة الذاتية العالمية";
-                    loader.style.width = "0%";
-                    btn.disabled = false;
-                    status.innerHTML = '<i class="fas fa-check-circle"></i> تم التحميل بنجاح!';
-                    status.style.color = "#10b981";
-                }
-            }, 50);
-        }
-
-        async function performPDFExport() {
-            document.getElementById('outName').innerText = document.getElementById('inName').value || "الاسم بالكامل";
+            // تعبئة البيانات
+            document.getElementById('outName').innerText = document.getElementById('inName').value || "الاسم الكامل";
             document.getElementById('outJob').innerText = document.getElementById('inJob').value || "المسمى الوظيفي";
-            document.getElementById('outAbout').innerText = document.getElementById('inAbout').value;
             document.getElementById('outExp').innerText = document.getElementById('inExp').value;
             document.getElementById('outEdu').innerText = document.getElementById('inEdu').value;
+            document.getElementById('outAbout').innerText = document.getElementById('inAbout').value;
+            document.getElementById('outPhone').innerText = document.getElementById('inPhone').value;
+            document.getElementById('outEmail').innerText = document.getElementById('inEmail').value;
             
-            const skills = document.getElementById('inSkills').value.split('،').map(s => `<div class="side-item"><i class="fas fa-check"></i> ${s.trim()}</div>`).join('');
-            document.getElementById('outSkills').innerHTML = skills;
+            const skillsArr = document.getElementById('inSkills').value.split(',');
+            document.getElementById('outSkills').innerHTML = skillsArr.map(s => s.trim() ? `<span class="skill-tag">${s.trim()}</span>` : '').join('');
 
-            document.getElementById('outContact').innerHTML = `
-                <div class="side-item"><i class="fas fa-phone"></i> ${document.getElementById('inPhone').value}</div>
-                <div class="side-item"><i class="fas fa-envelope"></i> ${document.getElementById('inEmail').value}</div>
-            `;
+            // انيميشن التحميل
+            btn.disabled = true;
+            status.innerText = "جاري المعالجة بدقة عالية...";
+            status.style.color = "var(--primary)";
+            
+            let p = 0;
+            const inv = setInterval(async () => {
+                p += 10;
+                bar.style.width = p + "%";
+                if(p >= 100) {
+                    clearInterval(inv);
+                    
+                    const canvas = await html2canvas(document.getElementById('cv-target'), { scale: 3, useCORS: true });
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+                    pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
+                    pdf.save(`CV_${document.getElementById('inName').value || 'User'}.pdf`);
 
-            const canvas = await html2canvas(document.getElementById('final-document'), { scale: 3, useCORS: true });
-            const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
-            pdf.save("Elite_CV.pdf");
+                    bar.style.width = "0%";
+                    btn.disabled = false;
+                    status.innerText = "✅ تم استخراج الملف بنجاح!";
+                    status.style.color = "#059669";
+                }
+            }, 60);
         }
     </script>
 </body>

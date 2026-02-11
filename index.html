@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cv Forge | النسخة الكاملة والمصححة</title>
+    <title>Cv Forge | Translation Edition</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -29,91 +29,64 @@
         }
         
         * { box-sizing: border-box; transition: background 0.3s, color 0.3s; }
-        body { 
-            margin: 0; padding: 0; width: 100%; overflow-x: hidden; 
-            background: var(--bg-grad); font-family: 'Cairo', sans-serif; color: var(--text-main);
-        }
+        body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; background: var(--bg-grad); font-family: 'Cairo', sans-serif; color: var(--text-main); }
 
         header { 
             width: 100%; padding: 15px 25px; background: var(--input-bg);
             box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .logo-container { display: flex; align-items: center; gap: 12px; }
-        .logo-icon {
-            width: 40px; height: 40px; background: #0f172a; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            transform: rotate(-10deg); box-shadow: 3px 3px 0 var(--accent);
+        
+        .controls { display: flex; gap: 10px; align-items: center; }
+        .lang-btn { 
+            padding: 8px 12px; border-radius: 8px; border: 1px solid var(--accent); 
+            background: transparent; color: var(--accent); cursor: pointer; font-weight: bold; font-size: 12px;
         }
-        .logo-icon i { color: white; font-size: 20px; transform: rotate(10deg); }
-        .logo-text { font-family: 'Almarai'; font-size: 24px; font-weight: 900; color: var(--text-main); }
-        .logo-text span { color: var(--accent); }
-
-        .theme-toggle {
-            cursor: pointer; width: 45px; height: 45px; border-radius: 50%;
-            background: var(--bg-grad); display: flex; align-items: center; justify-content: center;
-            border: 2px solid var(--accent); color: var(--accent); font-size: 20px;
-        }
+        .lang-btn.active { background: var(--accent); color: white; }
 
         .app-wrapper { width: 100%; max-width: 750px; margin: 25px auto; padding: 0 20px; }
-        .main-card { 
-            background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 24px; padding: 35px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.1);
-        }
+        .main-card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 24px; padding: 35px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.1); }
         
-        .section-label { 
-            font-size: 13px; font-weight: 800; color: var(--accent); text-transform: uppercase;
-            margin: 25px 0 15px; display: flex; align-items: center; gap: 8px;
-        }
+        .section-label { font-size: 13px; font-weight: 800; color: var(--accent); text-transform: uppercase; margin: 25px 0 15px; display: flex; align-items: center; gap: 8px; }
         .section-label::after { content: ""; flex: 1; height: 1px; background: var(--input-border); }
 
         .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .input-group { margin-bottom: 15px; }
         label { display: block; font-weight: 700; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
-        input, textarea { 
-            width: 100%; padding: 12px; border: 2px solid var(--input-border); border-radius: 12px; 
-            font-family: inherit; outline: none; background: var(--input-bg); color: var(--text-main); font-size: 14px;
-        }
-        input:focus, textarea:focus { border-color: var(--accent); }
+        input, textarea { width: 100%; padding: 12px; border: 2px solid var(--input-border); border-radius: 12px; font-family: inherit; outline: none; background: var(--input-bg); color: var(--text-main); font-size: 14px; }
 
-        .btn-download { 
-            width: 100%; padding: 18px; background: var(--primary); color: white; 
-            border: none; border-radius: 16px; font-size: 17px; font-weight: 800; 
-            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px;
-            margin-top: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        body.dark-mode .btn-download { background: var(--accent); color: var(--primary); }
+        .btn-download { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 16px; font-size: 17px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 20px; }
+        
+        #status-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; }
+        .status-modal { background: var(--input-bg); padding: 40px; border-radius: 30px; text-align: center; width: 85%; max-width: 350px; }
 
-        #status-overlay {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center;
-        }
-        .status-modal { background: var(--input-bg); padding: 40px; border-radius: 30px; text-align: center; width: 85%; max-width: 350px; color: var(--text-main); }
-
-        /* --- PDF Template --- */
+        /* --- PDF Template (بإضافة دعم الاتجاهين) --- */
         #pdf-render-zone { position: absolute; top: -20000px; left: -20000px; }
         .pdf-page { width: 210mm; height: 297mm; background: white; display: flex; flex-direction: column; color: #0f172a; }
         .pdf-header { background: #0f172a; padding: 60px; color: white; display: flex; justify-content: space-between; align-items: center; height: 250px; }
         .pdf-body { display: grid; grid-template-columns: 1.6fr 1fr; flex: 1; }
-        .pdf-main { padding: 50px; }
-        .pdf-side { background: #f1f5f9; padding: 50px 35px; border-right: 1px solid #e2e8f0; }
+        .pdf-page.ltr { direction: ltr; font-family: sans-serif; }
+        .pdf-page.ltr .pdf-side { border-right: none; border-left: 1px solid #e2e8f0; }
     </style>
 </head>
 <body id="body-tag">
 
     <header>
         <div class="logo-container">
-            <div class="logo-icon"><i class="fas fa-hammer"></i></div>
-            <div class="logo-text">CV <span>FORGE</span></div>
+            <div class="logo-text" style="font-family:'Almarai'; font-weight:900;">CV <span style="color:var(--accent)">FORGE</span></div>
         </div>
-        <div class="theme-toggle" onclick="toggleTheme()"><i id="theme-icon" class="fas fa-moon"></i></div>
+        <div class="controls">
+            <button class="lang-btn active" id="btn-ar" onclick="translateContent('ar')">AR</button>
+            <button class="lang-btn" id="btn-en" onclick="translateContent('en')">EN</button>
+            <div class="theme-toggle" style="cursor:pointer; margin-right:15px; color:var(--accent)" onclick="toggleTheme()"><i id="theme-icon" class="fas fa-moon"></i></div>
+        </div>
     </header>
 
     <div class="app-wrapper">
         <div class="main-card">
-            <div id="typing" style="text-align:center; margin-bottom:10px; color:var(--accent); font-weight:bold;"></div>
+            <div id="typing" style="text-align:center; margin-bottom:15px; color:var(--accent); font-size:14px;"></div>
             
-            <div class="section-label">المعلومات الأساسية</div>
+            <div class="section-label">المعلومات / Information</div>
             <div class="input-grid">
                 <div class="input-group"><label>الاسم الكامل</label><input type="text" id="inName" oninput="save()"></div>
                 <div class="input-group"><label>المسمى الوظيفي</label><input type="text" id="inJob" oninput="save()"></div>
@@ -122,28 +95,13 @@
                 <div class="input-group"><label>تاريخ الميلاد</label><input type="text" id="inBirth" oninput="save()"></div>
                 <div class="input-group"><label>العنوان</label><input type="text" id="inAddress" oninput="save()"></div>
             </div>
-            <div class="input-grid">
-                <div class="input-group"><label>رقم الهاتف</label><input type="text" id="inPhone" oninput="save()"></div>
-                <div class="input-group"><label>الإيميل</label><input type="email" id="inEmail" oninput="save()"></div>
-            </div>
-
-            <div class="section-label">الصورة والنبذة</div>
-            <div class="input-group"><label>الصورة الشخصية</label><input type="file" id="inPhoto" accept="image/*"></div>
-            <div class="input-group"><label>النبذة التعريفية (About)</label><textarea id="inAbout" oninput="save()" rows="3" placeholder="اكتب نبذة مختصرة عن نفسك..."></textarea></div>
-
-            <div class="section-label">المسيرة المهنية</div>
+            
+            <div class="section-label">النبذة والخبرات / Experience</div>
+            <div class="input-group"><label>الصورة</label><input type="file" id="inPhoto" accept="image/*"></div>
+            <div class="input-group"><label>النبذة التعريفية</label><textarea id="inAbout" oninput="save()" rows="3"></textarea></div>
             <div class="input-group"><label>الخبرات العملية</label><textarea id="inExp" oninput="save()" rows="5"></textarea></div>
-            <div class="input-group"><label>التعليم</label><textarea id="inEdu" oninput="save()" rows="3"></textarea></div>
-
-            <div class="section-label">المهارات واللغات</div>
-            <div class="input-grid">
-                <div class="input-group"><label>المهارات</label><input type="text" id="inSkills" oninput="save()"></div>
-                <div class="input-group"><label>اللغات</label><input type="text" id="inLang" oninput="save()"></div>
-            </div>
-
-            <button class="btn-download" onclick="exportCV()">
-                <i class="fas fa-file-pdf"></i> تحميل بصيغة PDF
-            </button>
+            
+            <button class="btn-download" onclick="exportCV()"><i class="fas fa-file-pdf"></i> تحميل PDF</button>
         </div>
     </div>
 
@@ -152,106 +110,101 @@
     <div id="pdf-render-zone">
         <div id="pdf-template" class="pdf-page">
             <div class="pdf-header">
-                <div><h1 id="outName" style="font-size:55px; margin:0;"></h1><p id="outJob" style="font-size:24px; color:#38bdf8;"></p></div>
-                <div style="width:170px; height:170px; border-radius:30px; border:6px solid rgba(255,255,255,0.2); overflow:hidden;"><img id="outPhoto" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div><h1 id="outName" style="font-size:50px; margin:0;"></h1><p id="outJob" style="font-size:22px; color:#38bdf8;"></p></div>
+                <div style="width:160px; height:160px; border-radius:20px; border:4px solid white; overflow:hidden;"><img id="outPhoto" style="width:100%; height:100%; object-fit:cover;"></div>
             </div>
             <div class="pdf-body">
-                <div class="pdf-main">
-                    <div style="color:#0f172a; font-size:20px; font-weight:900; border-bottom:3px solid #38bdf8; margin-bottom:15px;">الخبرات المهنية</div>
-                    <div id="outExp" style="white-space:pre-line; line-height:1.7; margin-bottom:30px; font-size:14px;"></div>
-                    <div style="color:#0f172a; font-size:20px; font-weight:900; border-bottom:3px solid #38bdf8; margin-bottom:15px;">التعليم</div>
-                    <div id="outEdu" style="white-space:pre-line; line-height:1.7; font-size:14px;"></div>
+                <div class="pdf-main" style="padding:40px;">
+                    <h3 id="label-exp" style="border-bottom:2px solid #38bdf8">الخبرات المهنية</h3>
+                    <div id="outExp" style="white-space:pre-line; font-size:14px;"></div>
                 </div>
-                <div class="pdf-side" style="padding:40px;">
-                    <div style="background:#0f172a; color:white; padding:8px; border-radius:8px; text-align:center; font-weight:800; margin-bottom:15px;">الملف الشخصي</div>
-                    <div id="outAbout" style="font-size:12px; line-height:1.6; margin-bottom:30px; white-space:pre-line;"></div>
-                    
-                    <div style="background:#0f172a; color:white; padding:8px; border-radius:8px; text-align:center; font-weight:800; margin-bottom:15px;">التواصل</div>
-                    <div style="font-size:12px; margin-bottom:8px;">📅 <span id="outBirth"></span></div>
-                    <div style="font-size:12px; margin-bottom:8px;">📍 <span id="outAddress"></span></div>
-                    <div style="font-size:12px; margin-bottom:8px;">📞 <span id="outPhone"></span></div>
-                    <div style="font-size:12px; margin-bottom:30px;">✉️ <span id="outEmail"></span></div>
-                    
-                    <div style="background:#0f172a; color:white; padding:8px; border-radius:8px; text-align:center; font-weight:800; margin-bottom:15px;">المهارات</div>
-                    <div id="outSkills" style="font-size:12px; margin-bottom:30px;"></div>
-                    <div style="background:#0f172a; color:white; padding:8px; border-radius:8px; text-align:center; font-weight:800; margin-bottom:15px;">اللغات</div>
-                    <div id="outLang" style="font-size:13px; text-align:center;"></div>
+                <div class="pdf-side" style="background:#f8fafc; padding:30px; border-right:1px solid #eee;">
+                    <h4 id="label-about" style="background:#0f172a; color:white; padding:5px; text-align:center;">الملف الشخصي</h4>
+                    <div id="outAbout" style="font-size:12px; margin-bottom:20px;"></div>
+                    <h4 id="label-contact" style="background:#0f172a; color:white; padding:5px; text-align:center;">التواصل</h4>
+                    <div style="font-size:11px;">📍 <span id="outAddress"></span></div>
+                    <div style="font-size:11px;">📅 <span id="outBirth"></span></div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function toggleTheme() {
-            const body = document.getElementById('body-tag');
-            const icon = document.getElementById('theme-icon');
-            body.classList.toggle('dark-mode');
-            if(body.classList.contains('dark-mode')) {
-                icon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'dark');
+        let currentLang = 'ar';
+
+        // دالة الترجمة باستخدام خدمة جوجل المجانية
+        async function translateContent(lang) {
+            if(lang === currentLang) return;
+            
+            const fieldsToTranslate = ['inName', 'inJob', 'inAbout', 'inExp', 'inAddress'];
+            const overlay = document.getElementById('status-overlay');
+            const box = document.getElementById('status-box');
+            
+            overlay.style.display = 'flex';
+            box.innerHTML = `<h3>جاري الترجمة إلى ${lang === 'en' ? 'الإنجليزية' : 'العربية'}...</h3>`;
+
+            for(let id of fieldsToTranslate) {
+                let text = document.getElementById(id).value;
+                if(!text) continue;
+                
+                try {
+                    const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${encodeURI(text)}`);
+                    const data = await res.json();
+                    document.getElementById(id).value = data[0][0][0];
+                } catch(e) { console.error("Translation Error"); }
+            }
+
+            currentLang = lang;
+            document.getElementById('btn-ar').classList.toggle('active');
+            document.getElementById('btn-en').classList.toggle('active');
+            
+            // ضبط اتجاه الـ PDF والكلمات الثابتة
+            const pdfTemplate = document.getElementById('pdf-template');
+            if(lang === 'en') {
+                pdfTemplate.classList.add('ltr');
+                document.getElementById('label-exp').innerText = "Professional Experience";
+                document.getElementById('label-about').innerText = "Profile";
+                document.getElementById('label-contact').innerText = "Contact";
             } else {
-                icon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'light');
+                pdfTemplate.classList.remove('ltr');
+                document.getElementById('label-exp').innerText = "الخبرات المهنية";
+                document.getElementById('label-about').innerText = "الملف الشخصي";
+                document.getElementById('label-contact').innerText = "التواصل";
             }
+
+            overlay.style.display = 'none';
+            save();
         }
 
-        const fields = ['inName', 'inJob', 'inBirth', 'inAddress', 'inPhone', 'inEmail', 'inAbout', 'inExp', 'inEdu', 'inSkills', 'inLang'];
-        function save() { fields.forEach(f => localStorage.setItem(f, document.getElementById(f).value)); }
-        function load() { 
-            fields.forEach(f => { const v = localStorage.getItem(f); if(v) document.getElementById(f).value = v; });
-            if(localStorage.getItem('theme') === 'dark') toggleTheme();
-            typeEffect();
+        function toggleTheme() {
+            document.getElementById('body-tag').classList.toggle('dark-mode');
+            const icon = document.getElementById('theme-icon');
+            icon.classList.toggle('fa-moon'); icon.classList.toggle('fa-sun');
         }
 
-        function typeEffect() {
-            const text = "ابدأ ببناء سيرتك الذاتية الاحترافية الآن..";
-            let i = 0;
-            const target = document.getElementById('typing');
-            function typing() {
-                if (i < text.length) {
-                    target.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typing, 100);
-                }
-            }
-            typing();
+        function save() {
+            const fields = ['inName', 'inJob', 'inBirth', 'inAddress', 'inAbout', 'inExp'];
+            fields.forEach(f => localStorage.setItem(f, document.getElementById(f).value));
         }
-
-        document.getElementById('inPhoto').onchange = e => {
-            const reader = new FileReader();
-            reader.onload = () => document.getElementById('outPhoto').src = reader.result;
-            reader.readAsDataURL(e.target.files[0]);
-        };
 
         async function exportCV() {
-            const over = document.getElementById('status-overlay');
-            const box = document.getElementById('status-box');
-            over.style.display = 'flex';
-            box.innerHTML = `<h3>جاري التحميل...</h3>`;
-
-            // تحديث البيانات للـ PDF
-            document.getElementById('outName').innerText = document.getElementById('inName').value || "الاسم";
-            document.getElementById('outJob').innerText = document.getElementById('inJob').value || "المسمى الوظيفي";
+            document.getElementById('outName').innerText = document.getElementById('inName').value;
+            document.getElementById('outJob').innerText = document.getElementById('inJob').value;
             document.getElementById('outAbout').innerText = document.getElementById('inAbout').value;
             document.getElementById('outExp').innerText = document.getElementById('inExp').value;
-            document.getElementById('outEdu').innerText = document.getElementById('inEdu').value;
-            document.getElementById('outBirth').innerText = document.getElementById('inBirth').value;
             document.getElementById('outAddress').innerText = document.getElementById('inAddress').value;
-            document.getElementById('outPhone').innerText = document.getElementById('inPhone').value;
-            document.getElementById('outEmail').innerText = document.getElementById('inEmail').value;
-            document.getElementById('outSkills').innerText = document.getElementById('inSkills').value;
-            document.getElementById('outLang').innerText = document.getElementById('inLang').value;
+            document.getElementById('outBirth').innerText = document.getElementById('inBirth').value;
 
-            setTimeout(async () => {
-                const canvas = await html2canvas(document.getElementById('pdf-template'), { scale: 2 });
-                const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
-                pdf.save("CV_Forge_Final.pdf");
-                box.innerHTML = `<i class="fas fa-check-circle" style="font-size:50px; color:#22c55e;"></i><h3>تم التحميل!</h3><button onclick="document.getElementById('status-overlay').style.display='none'" class="btn-download" style="padding:10px; margin-top:15px; font-size:14px;">حسناً</button>`;
-            }, 1500);
+            const canvas = await html2canvas(document.getElementById('pdf-template'), { scale: 2 });
+            const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
+            pdf.save("CV_Translated.pdf");
         }
-
-        window.onload = load;
+        
+        window.onload = () => {
+            const fields = ['inName', 'inJob', 'inBirth', 'inAddress', 'inAbout', 'inExp'];
+            fields.forEach(f => { if(localStorage.getItem(f)) document.getElementById(f).value = localStorage.getItem(f); });
+        };
     </script>
 </body>
 </html>

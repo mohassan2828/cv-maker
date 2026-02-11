@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cv Forge | Space Optimized Edition</title>
+    <title>Cv Forge | Professional Polish</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -15,66 +15,70 @@
         :root { 
             --primary: #0f172a; --accent: #38bdf8;
             --bg-grad: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-bg: rgba(255, 255, 255, 0.95);
             --text-main: #0f172a; --text-muted: #64748b;
             --input-bg: #ffffff; --input-border: #e2e8f0;
         }
 
         body.dark-mode {
             --bg-grad: linear-gradient(135deg, #020617 0%, #0f172a 100%);
-            --card-bg: rgba(30, 41, 59, 0.95);
+            --card-bg: rgba(30, 41, 59, 0.98);
             --text-main: #f1f5f9; --text-muted: #94a3b8;
             --input-bg: #1e293b; --input-border: #334155;
         }
         
-        * { box-sizing: border-box; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        body { margin: 0; padding: 0; background: var(--bg-grad); font-family: 'Cairo', sans-serif; color: var(--text-main); }
+        * { box-sizing: border-box; transition: 0.2s; }
+        body { margin: 0; padding: 0; background: var(--bg-grad); font-family: 'Cairo', sans-serif; color: var(--text-main); line-height: 1.4; }
 
         header { 
-            width: 100%; padding: 15px 25px; background: var(--input-bg);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
+            width: 100%; padding: 12px 25px; background: var(--input-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
         }
         
         .palette-wrapper { position: relative; display: flex; align-items: center; }
         .palette-hint {
             position: absolute; right: 45px; background: var(--accent); color: white;
-            font-size: 10px; padding: 4px 8px; border-radius: 5px; white-space: nowrap;
-            animation: bounce 2s infinite; font-weight: bold;
+            font-size: 10px; padding: 3px 8px; border-radius: 4px; white-space: nowrap;
+            animation: bounce 2s infinite; font-weight: bold; pointer-events: none;
         }
         @keyframes bounce { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-5px); } }
 
-        .palette-btn { width: 38px; height: 38px; border-radius: 10px; border: none; background: var(--accent); color: white; cursor: pointer; font-size: 18px; }
+        .palette-btn { width: 36px; height: 36px; border-radius: 8px; border: none; background: var(--accent); color: white; cursor: pointer; font-size: 16px; }
 
-        .lang-switch { display: flex; background: var(--bg-grad); border-radius: 10px; padding: 4px; border: 1px solid var(--input-border); }
-        .lang-btn { padding: 6px 12px; border-radius: 7px; border: none; cursor: pointer; font-size: 11px; font-weight: 800; color: var(--text-muted); background: transparent; }
+        .lang-switch { display: flex; background: var(--bg-grad); border-radius: 8px; padding: 3px; border: 1px solid var(--input-border); }
+        .lang-btn { padding: 5px 10px; border-radius: 6px; border: none; cursor: pointer; font-size: 11px; font-weight: 800; color: var(--text-muted); background: transparent; }
         .lang-btn.active { background: var(--accent); color: white; }
 
-        .app-wrapper { width: 100%; max-width: 800px; margin: 25px auto; padding: 0 20px; }
-        .main-card { background: var(--card-bg); border-radius: 24px; padding: 35px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .app-wrapper { width: 100%; max-width: 800px; margin: 20px auto; padding: 0 15px; }
+        .main-card { background: var(--card-bg); border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
         
-        .section-label { font-size: 13px; font-weight: 800; color: var(--accent); margin: 25px 0 15px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
+        .section-label { font-size: 12px; font-weight: 800; color: var(--accent); margin: 20px 0 12px; display: flex; align-items: center; gap: 8px; }
         .section-label::after { content: ""; flex: 1; height: 1px; background: var(--input-border); }
 
-        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .input-group { margin-bottom: 15px; }
-        label { display: block; font-weight: 700; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
-        input, textarea { width: 100%; padding: 12px; border: 2px solid var(--input-border); border-radius: 12px; font-family: inherit; background: var(--input-bg); color: var(--text-main); }
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .input-group { margin-bottom: 12px; }
+        label { display: block; font-weight: 700; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+        input, textarea { width: 100%; padding: 10px; border: 1px solid var(--input-border); border-radius: 10px; font-family: inherit; background: var(--input-bg); color: var(--text-main); font-size: 13.5px; }
 
-        .btn-download { width: 100%; padding: 18px; background: var(--accent); color: white; border: none; border-radius: 16px; font-size: 17px; font-weight: 800; cursor: pointer; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-download { width: 100%; padding: 16px; background: var(--accent); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
-        /* --- PDF Optimization --- */
+        #status-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; color: white; flex-direction: column; backdrop-filter: blur(5px); }
+        .loader-box { background: var(--input-bg); color: var(--text-main); padding: 25px; border-radius: 20px; text-align: center; border: 2px solid var(--accent); width: 280px; }
+
+        /* --- PDF Template Fixes --- */
         #pdf-render-zone { position: absolute; top: -20000px; left: -20000px; }
-        .pdf-page { width: 210mm; height: 297mm; background: white; display: flex; flex-direction: column; color: #0f172a; }
-        .pdf-header { background: var(--primary); padding: 40px 50px; color: white; display: flex; justify-content: space-between; align-items: center; height: 220px; }
-        .pdf-body { display: grid; grid-template-columns: 1.5fr 1fr; flex: 1; }
-        .pdf-main { padding: 30px 40px; }
-        .pdf-side { background: #f8fafc; padding: 30px; border-right: 1px solid #e2e8f0; }
+        .pdf-page { width: 210mm; height: 297mm; background: white; display: flex; flex-direction: column; color: #0f172a; font-family: 'Cairo', sans-serif; }
+        .pdf-header { background: var(--primary); padding: 35px 45px; color: white; display: flex; justify-content: space-between; align-items: center; height: 210px; }
+        .pdf-body { display: grid; grid-template-columns: 1.55fr 1fr; flex: 1; }
+        .pdf-main { padding: 25px 40px; }
+        .pdf-side { background: #f8fafc; padding: 25px 30px; border-right: 1px solid #e2e8f0; }
         
-        .pdf-section-title { color: var(--primary); font-size: 16px; font-weight: 900; margin-top: 20px; }
-        .pdf-divider { height: 2px; background: var(--accent); margin: 8px 0 15px; width: 100%; }
-        .pdf-badge { background: var(--primary); color: white; padding: 6px 12px; border-radius: 6px; font-weight: 800; font-size: 12px; margin-bottom: 12px; text-align: center; }
+        .pdf-section-title { color: var(--primary); font-size: 15px; font-weight: 900; margin-top: 15px; margin-bottom: 4px; }
+        .pdf-divider { height: 2px; background: var(--accent); margin-bottom: 12px; width: 100%; border-radius: 2px; }
+        .pdf-badge { background: var(--primary); color: white; padding: 5px 10px; border-radius: 5px; font-weight: 800; font-size: 11.5px; margin-bottom: 10px; text-align: center; }
 
+        .content-text { white-space: pre-line; line-height: 1.4; font-size: 12px; margin-bottom: 15px; color: #334155; }
         .pdf-page.ltr { direction: ltr; }
         .pdf-page.ltr .pdf-side { border-right: none; border-left: 1px solid #e2e8f0; }
     </style>
@@ -82,17 +86,17 @@
 <body id="body-tag">
 
     <header>
-        <div style="font-family:'Almarai'; font-weight:900; font-size:22px;">CV <span style="color:var(--accent)">FORGE</span></div>
+        <div style="font-family:'Almarai'; font-weight:900; font-size:20px;">CV <span id="forge-logo" style="color:var(--accent)">FORGE</span></div>
         <div class="header-actions">
             <div class="palette-wrapper">
-                <span class="palette-hint" id="p-hint">جرب ألواناً جديدة!</span>
+                <span class="palette-hint" id="p-hint">غير الألوان!</span>
                 <button class="palette-btn" onclick="generatePalette()"><i class="fas fa-palette"></i></button>
             </div>
             <div class="lang-switch">
                 <button class="lang-btn active" id="btn-ar" onclick="handleTranslate('ar')">AR</button>
                 <button class="lang-btn" id="btn-en" onclick="handleTranslate('en')">EN</button>
             </div>
-            <div style="cursor:pointer; color:var(--accent); font-size:20px;" onclick="toggleTheme()">
+            <div style="cursor:pointer; color:var(--accent); font-size:18px;" onclick="toggleTheme()">
                 <i id="theme-icon" class="fas fa-moon"></i>
             </div>
         </div>
@@ -114,7 +118,7 @@
                 <div class="input-group"><label>الإيميل</label><input type="email" id="inEmail" oninput="save()"></div>
             </div>
 
-            <div class="section-label">المحتوى الأكاديمي والمهني</div>
+            <div class="section-label">المسيرة الذاتية</div>
             <div class="input-group"><label>الصورة الشخصية</label><input type="file" id="inPhoto" accept="image/*"></div>
             <div class="input-group"><label>النبذة التعريفية</label><textarea id="inAbout" oninput="save()" rows="2"></textarea></div>
             <div class="input-group"><label>الخبرات العملية</label><textarea id="inExp" oninput="save()" rows="4"></textarea></div>
@@ -126,48 +130,56 @@
             </div>
 
             <button class="btn-download" onclick="exportCV()">
-                <i class="fas fa-file-pdf"></i> تحميل السيرة الذاتية المستغلة للمساحة
+                <i class="fas fa-file-pdf"></i> (تحميل السيرة الذاتية pdf)
             </button>
         </div>
     </div>
 
-    <div id="status-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9999; align-items:center; justify-content:center; color:white; flex-direction:column;">
-        <div id="status-box" style="text-align:center;"></div>
+    <div id="status-overlay">
+        <div class="loader-box">
+            <i class="fas fa-circle-notch fa-spin" style="font-size:30px; color:var(--accent); margin-bottom:15px;"></i>
+            <div id="status-text" style="font-weight:bold;">جاري معالجة البيانات...</div>
+        </div>
     </div>
 
     <div id="pdf-render-zone">
         <div id="pdf-template" class="pdf-page">
             <div id="pdf-header" class="pdf-header">
-                <div><h1 id="outName" style="font-size:42px; margin:0; letter-spacing:-1px;"></h1><p id="outJob" style="font-size:20px; opacity:0.9; margin:5px 0 0;"></p></div>
-                <div style="width:140px; height:140px; border-radius:15px; border:3px solid white; overflow:hidden; background:#eee;"><img id="outPhoto" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div>
+                    <h1 id="outName" style="font-size:38px; margin:0; line-height:1.1;"></h1>
+                    <p id="outJob" style="font-size:18px; opacity:0.9; margin:4px 0 0;"></p>
+                </div>
+                <div style="width:130px; height:130px; border-radius:12px; border:3px solid white; overflow:hidden; background:#eee;">
+                    <img id="outPhoto" style="width:100%; height:100%; object-fit:cover;">
+                </div>
             </div>
             <div class="pdf-body">
                 <div class="pdf-main">
                     <div id="pdf-label-exp" class="pdf-section-title">الخبرات المهنية</div>
-                    <div class="pdf-divider" id="div1"></div>
-                    <div id="outExp" style="white-space:pre-line; line-height:1.5; font-size:12.5px; margin-bottom:20px;"></div>
+                    <div class="pdf-divider" id="d1"></div>
+                    <div id="outExp" class="content-text"></div>
                     
                     <div id="pdf-label-edu" class="pdf-section-title">التعليم</div>
-                    <div class="pdf-divider" id="div2"></div>
-                    <div id="outEdu" style="white-space:pre-line; line-height:1.5; font-size:12.5px; margin-bottom:25px;"></div>
+                    <div class="pdf-divider" id="d2"></div>
+                    <div id="outEdu" class="content-text"></div>
 
-                    <div id="pdf-label-skills-main" class="pdf-section-title">المهارات والقدرات</div>
-                    <div class="pdf-divider" id="div3"></div>
-                    <div id="outSkills" style="font-size:12.5px; line-height:1.6;"></div>
+                    <div id="pdf-label-skills" class="pdf-section-title">المهارات والقدرات</div>
+                    <div class="pdf-divider" id="d3"></div>
+                    <div id="outSkills" class="content-text" style="margin-bottom:0;"></div>
                 </div>
                 
                 <div class="pdf-side" id="pdf-sidebar">
                     <div id="pdf-label-about" class="pdf-badge">الملف الشخصي</div>
-                    <div id="outAbout" style="font-size:11px; line-height:1.6; margin-bottom:25px; text-align:justify;"></div>
+                    <div id="outAbout" style="font-size:10.5px; line-height:1.4; margin-bottom:20px; color:#475569;"></div>
                     
                     <div id="pdf-label-contact" class="pdf-badge">بيانات التواصل</div>
-                    <div style="font-size:10.5px; margin-bottom:8px;">📅 <span id="outBirth"></span></div>
-                    <div style="font-size:10.5px; margin-bottom:8px;">📍 <span id="outAddress"></span></div>
-                    <div style="font-size:10.5px; margin-bottom:8px;">📞 <span id="outPhone"></span></div>
-                    <div style="font-size:10.5px; margin-bottom:25px;">✉️ <span id="outEmail"></span></div>
+                    <div style="font-size:10px; margin-bottom:6px;">📅 <span id="outBirth"></span></div>
+                    <div style="font-size:10px; margin-bottom:6px;">📍 <span id="outAddress"></span></div>
+                    <div style="font-size:10px; margin-bottom:6px;">📞 <span id="outPhone"></span></div>
+                    <div style="font-size:10px; margin-bottom:20px;">✉️ <span id="outEmail"></span></div>
 
                     <div id="pdf-label-lang" class="pdf-badge">اللغات</div>
-                    <div id="outLang" style="font-size:12px; text-align:center; font-weight:bold;"></div>
+                    <div id="outLang" style="font-size:11px; text-align:center; font-weight:bold; color:var(--primary);"></div>
                 </div>
             </div>
         </div>
@@ -199,7 +211,7 @@
             if(lang === currentLang) return;
             const over = document.getElementById('status-overlay');
             over.style.display = 'flex';
-            document.getElementById('status-box').innerHTML = `<h2>جاري ترجمة المحتوى...</h2>`;
+            document.getElementById('status-text').innerText = "جاري ترجمة كافة الحقول...";
 
             for(let id of fields) {
                 if(['inPhone', 'inEmail', 'inBirth'].includes(id)) continue;
@@ -218,12 +230,12 @@
             document.getElementById('pdf-template').classList.toggle('ltr', lang === 'en');
             
             const labels = {
-                en: { exp:"Experience", edu:"Education", skills:"Skills & Abilities", about:"Profile", contact:"Contact", lang:"Languages" },
+                en: { exp:"Work Experience", edu:"Education", skills:"Skills", about:"Profile", contact:"Contact Info", lang:"Languages" },
                 ar: { exp:"الخبرات المهنية", edu:"التعليم", skills:"المهارات والقدرات", about:"الملف الشخصي", contact:"بيانات التواصل", lang:"اللغات" }
             };
             document.getElementById('pdf-label-exp').innerText = labels[lang].exp;
             document.getElementById('pdf-label-edu').innerText = labels[lang].edu;
-            document.getElementById('pdf-label-skills-main').innerText = labels[lang].skills;
+            document.getElementById('pdf-label-skills').innerText = labels[lang].skills;
             document.getElementById('pdf-label-about').innerText = labels[lang].about;
             document.getElementById('pdf-label-contact').innerText = labels[lang].contact;
             document.getElementById('pdf-label-lang').innerText = labels[lang].lang;
@@ -248,15 +260,15 @@
 
             const over = document.getElementById('status-overlay');
             over.style.display = 'flex';
-            document.getElementById('status-box').innerHTML = `<h2>جاري بناء الـ PDF...</h2>`;
+            document.getElementById('status-text').innerText = "جاري إنشاء ملف الـ PDF بألوانك المخصصة...";
 
             setTimeout(async () => {
                 const canvas = await html2canvas(document.getElementById('pdf-template'), { scale: 2 });
                 const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
-                pdf.save(`CV_Optimized.pdf`);
+                pdf.save(`CV_Professional.pdf`);
                 over.style.display = 'none';
-            }, 1000);
+            }, 1200);
         }
         window.onload = load;
     </script>

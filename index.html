@@ -3,267 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cv Forge | Ultimate Multi-Lang Edition</title>
+    <title>CV FORGE | 3D Premium Edition</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
-        :root { 
-            --primary: #1a237e; --accent: #00bcd4;
-            --bg-grad: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            --card-bg: rgba(255, 255, 255, 0.98);
-            --text-main: #0f172a; --text-muted: #64748b;
-            --input-bg: #ffffff; --input-border: #e2e8f0;
+        :root {
+            --base-white: #f0f2f5;
+            --shadow-light: #ffffff;
+            --shadow-dark: #d1d9e6;
+            --accent: #00bcd4;
+            --primary: #1a237e;
+            --text: #3e4b5b;
         }
 
-        body.dark-mode {
-            --bg-grad: linear-gradient(135deg, #020617 0%, #0f172a 100%);
-            --card-bg: rgba(30, 41, 59, 1);
-            --text-main: #f1f5f9; --text-muted: #94a3b8;
-            --input-bg: #1e293b; --input-border: #334155;
+        body { 
+            background-color: var(--base-white); 
+            font-family: 'Cairo', 'Poppins', sans-serif; 
+            margin: 0; padding: 0; color: var(--text);
+            transition: all 0.4s ease;
         }
-        
-        * { box-sizing: border-box; transition: 0.3s; }
-        body { margin: 0; padding: 0; background: var(--bg-grad); font-family: 'Cairo', sans-serif; color: var(--text-main); }
 
-        /* --- Header & UI --- */
-        header { 
-            width: 100%; padding: 15px 25px; background: var(--input-bg);
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;
+        /* --- 3D Neumorphic Header --- */
+        header {
+            padding: 20px 40px;
+            background: var(--base-white);
             display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+            position: sticky; top: 0; z-index: 1000;
         }
-        .logo-box { display: flex; align-items: center; gap: 10px; }
-        .logo-img { height: 40px; border-radius: 5px; }
-        .logo-text { font-weight: 900; font-size: 20px; color: var(--primary); font-family: 'Poppins', sans-serif; }
 
-        .lang-selector { display: flex; gap: 5px; background: #eee; padding: 4px; border-radius: 10px; }
-        .lang-btn { padding: 5px 8px; border: none; border-radius: 7px; cursor: pointer; font-size: 10px; font-weight: 800; background: transparent; }
-        .lang-btn.active { background: var(--accent); color: white; }
+        .logo-box {
+            font-size: 24px; font-weight: 900; color: var(--primary);
+            text-shadow: 2px 2px 4px var(--shadow-dark);
+        }
 
-        .welcome-hero { text-align: center; padding: 40px 20px; }
-        .welcome-hero h1 { font-size: 28px; font-weight: 900; margin: 0; color: var(--primary); }
-        .welcome-hero p { color: var(--text-muted); font-size: 15px; margin-top: 10px; }
+        .lang-selector {
+            display: flex; gap: 8px; padding: 5px;
+            background: var(--base-white);
+            border-radius: 15px;
+            box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+        }
 
-        .app-container { max-width: 850px; margin: 0 auto 50px; padding: 0 15px; }
-        .main-card { background: var(--card-bg); border-radius: 25px; padding: 35px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
+        .lang-btn {
+            border: none; padding: 8px 15px; border-radius: 10px;
+            cursor: pointer; font-weight: 800; font-size: 12px;
+            background: transparent; color: var(--text);
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--base-white);
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            color: var(--accent);
+        }
+
+        /* --- Main 3D Container --- */
+        .app-container { max-width: 900px; margin: 40px auto; padding: 20px; }
+
+        .glass-card {
+            background: var(--base-white);
+            padding: 40px; border-radius: 30px;
+            box-shadow: 20px 20px 60px var(--shadow-dark), -20px -20px 60px var(--shadow-light);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .section-3d-title {
+            font-weight: 900; font-size: 18px; color: var(--accent);
+            margin: 30px 0 20px; display: flex; align-items: center; gap: 10px;
+        }
+
+        /* --- Form Elements --- */
+        .input-group { margin-bottom: 20px; }
+        label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; opacity: 0.8; }
         
-        .section-header { font-size: 14px; font-weight: 800; color: var(--accent); margin: 30px 0 15px; display: flex; align-items: center; gap: 10px; }
-        .section-header::after { content: ""; flex: 1; height: 1px; background: var(--input-border); }
+        input, textarea {
+            width: 100%; padding: 15px; border: none; border-radius: 15px;
+            background: var(--base-white);
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+            font-family: inherit; color: var(--text); outline: none;
+        }
 
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
 
-        label { display: block; font-weight: 700; font-size: 12px; color: var(--text-muted); margin-bottom: 5px; }
-        input, textarea { width: 100%; padding: 12px; border: 1.5px solid var(--input-border); border-radius: 12px; font-family: inherit; background: var(--input-bg); color: var(--text-main); font-size: 14px; outline: none; }
-        input:focus { border-color: var(--accent); }
+        .btn-main {
+            width: 100%; padding: 20px; border: none; border-radius: 20px;
+            background: var(--base-white);
+            box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+            font-size: 18px; font-weight: 900; color: var(--primary);
+            cursor: pointer; transition: 0.2s; margin-top: 40px;
+        }
 
-        .download-btn { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 15px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 30px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .btn-main:active {
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+            transform: scale(0.98);
+        }
 
-        #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); padding: 15px 25px; background: var(--primary); color: white; border-radius: 50px; display: none; z-index: 10000; box-shadow: 0 10px 30px rgba(0,0,0,0.2); align-items: center; gap: 10px; font-weight: bold; }
-
-        /* --- PDF DESIGN --- */
+        /* --- PDF Rendering Zone (Hidden) --- */
         #pdf-render-zone { position: absolute; top: -20000px; left: -20000px; }
-        .pdf-page { width: 210mm; height: 297mm; background: white; display: grid; grid-template-columns: 75mm 135mm; color: #333; overflow: hidden; position: relative; }
-        .pdf-sidebar { background: #2c3e50; color: #ffffff; padding: 40px 25px; display: flex; flex-direction: column; align-items: center; height: 100%; }
-        .pdf-photo-frame { width: 140px; height: 140px; border-radius: 50%; border: 5px solid rgba(255,255,255,0.2); overflow: hidden; margin-bottom: 30px; background: #ecf0f1; }
-        .pdf-photo-frame img { width: 100%; height: 100%; object-fit: cover; }
-        .side-section { width: 100%; margin-bottom: 30px; }
-        .side-title { font-size: 16px; font-weight: 900; border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 15px; color: var(--accent); text-transform: uppercase; }
-        .contact-item { display: flex; align-items: center; gap: 10px; font-size: 11px; margin-bottom: 10px; opacity: 0.9; }
-        .pdf-content { padding: 50px 40px; background: #ffffff; position: relative; }
-        .pdf-name-header h1 { font-size: 38px; font-weight: 900; margin: 0; color: #2c3e50; }
-        .pdf-name-header p { font-size: 20px; color: var(--accent); font-weight: 700; margin: 10px 0 30px; }
-        .main-section { margin-bottom: 30px; }
-        .main-title { font-size: 17px; font-weight: 900; color: #2c3e50; text-transform: uppercase; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-bottom: 12px; }
-        .pdf-text { font-size: 13px; line-height: 1.6; color: #444; white-space: pre-line; }
-        .ltr { direction: ltr !important; grid-template-columns: 135mm 75mm !important; }
+        .pdf-page { width: 210mm; height: 297mm; background: white; display: grid; grid-template-columns: 75mm 135mm; direction: rtl; }
+        .pdf-page.ltr { direction: ltr; grid-template-columns: 135mm 75mm; }
+        .pdf-sidebar { background: #2c3e50; color: white; padding: 40px 25px; }
+        .pdf-content { padding: 50px 40px; }
+        .pdf-h { border-bottom: 2px solid #eee; padding-bottom: 5px; margin: 25px 0 10px; font-weight: 900; }
     </style>
 </head>
-<body id="body-tag">
+<body>
 
-    <header>
-        <div class="logo-box">
-            <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Logo" class="logo-img">
-            <span class="logo-text">CV<span style="color:var(--accent)">FORGE</span></span>
-        </div>
-        <div style="display:flex; gap:12px; align-items:center;">
-            <div class="lang-selector">
-                <button class="lang-btn active" onclick="changeLang('ar', this)">AR</button>
-                <button class="lang-btn" onclick="changeLang('en', this)">EN</button>
-                <button class="lang-btn" onclick="changeLang('fr', this)">FR</button>
-                <button class="lang-btn" onclick="changeLang('it', this)">IT</button>
-                <button class="lang-btn" onclick="changeLang('de', this)">DE</button>
-            </div>
-            <i class="fas fa-moon" style="cursor:pointer; color:var(--accent); font-size:18px;" onclick="toggleTheme()"></i>
-        </div>
-    </header>
-
-    <div class="welcome-hero">
-        <h1 id="txt-welcome">أهلاً بك في CV FORGE ✨</h1>
-        <p id="txt-subwelcome">صمم سيرتك الذاتية العالمية بخمس لغات وبتصميم PDF احترافي.</p>
+<header>
+    <div class="logo-box">CV<span style="color:var(--accent)">FORGE</span></div>
+    <div class="lang-selector">
+        <button class="lang-btn active" onclick="updateLang('ar', this)">AR</button>
+        <button class="lang-btn" onclick="updateLang('en', this)">EN</button>
+        <button class="lang-btn" onclick="updateLang('fr', this)">FR</button>
+        <button class="lang-btn" onclick="updateLang('it', this)">IT</button>
+        <button class="lang-btn" onclick="updateLang('de', this)">DE</button>
     </div>
+</header>
 
-    <div class="app-container">
-        <div class="main-card">
-            <div class="section-header" id="txt-personal">المعلومات الشخصية</div>
-            <div class="grid">
-                <div class="input-box"><label id="lbl-name">الاسم الكامل</label><input type="text" id="inName" oninput="save()"></div>
-                <div class="input-box"><label id="lbl-job">المسمى الوظيفي</label><input type="text" id="inJob" oninput="save()"></div>
-            </div>
-            <div class="grid">
-                <div class="input-box"><label id="lbl-birth">تاريخ الميلاد</label><input type="text" id="inBirth" oninput="save()"></div>
-                <div class="input-box"><label id="lbl-address">العنوان</label><input type="text" id="inAddress" oninput="save()"></div>
-            </div>
-            <div class="grid">
-                <div class="input-box"><label id="lbl-phone">رقم الهاتف</label><input type="text" id="inPhone" oninput="save()"></div>
-                <div class="input-box"><label id="lbl-email">البريد الإلكتروني</label><input type="email" id="inEmail" oninput="save()"></div>
-            </div>
-
-            <div class="section-header" id="txt-career">المسيرة والخبرات</div>
-            <div style="margin-bottom:15px;"><label id="lbl-photo">الصورة الشخصية</label><input type="file" id="inPhoto" accept="image/*"></div>
-            <div style="margin-bottom:15px;"><label id="lbl-about">النبذة التعريفية</label><textarea id="inAbout" oninput="save()" rows="2"></textarea></div>
-            <div style="margin-bottom:15px;"><label id="lbl-exp">الخبرات العملية</label><textarea id="inExp" oninput="save()" rows="4"></textarea></div>
-            <div style="margin-bottom:15px;"><label id="lbl-edu">التعليم</label><textarea id="inEdu" oninput="save()" rows="2"></textarea></div>
-
-            <div class="grid">
-                <div class="input-box"><label id="lbl-skills">المهارات</label><textarea id="inSkills" oninput="save()" rows="2"></textarea></div>
-                <div class="input-box"><label id="lbl-lang">اللغات</label><textarea id="inLang" oninput="save()" rows="2"></textarea></div>
-            </div>
-
-            <button class="download-btn" onclick="exportCV()">
-                <i class="fas fa-file-pdf"></i> <span id="txt-download">تحميل السيرة الذاتية (PDF)</span>
-            </button>
+<div class="app-container">
+    <div class="glass-card">
+        <div class="section-3d-title" id="t-personal">المعلومات الشخصية</div>
+        <div class="grid">
+            <div class="input-group"><label id="l-name">الاسم الكامل</label><input type="text" id="inName"></div>
+            <div class="input-group"><label id="l-job">المسمى الوظيفي</label><input type="text" id="inJob"></div>
         </div>
+        <div class="grid">
+            <div class="input-group"><label id="l-phone">رقم الهاتف</label><input type="text" id="inPhone"></div>
+            <div class="input-group"><label id="l-email">البريد الإلكتروني</label><input type="text" id="inEmail"></div>
+        </div>
+
+        <div class="section-3d-title" id="t-career">المسيرة والخبرات</div>
+        <div class="input-group"><label id="l-about">النبذة التعريفية</label><textarea id="inAbout" rows="3"></textarea></div>
+        <div class="input-group"><label id="l-exp">الخبرات المهنية</label><textarea id="inExp" rows="5"></textarea></div>
+        <div class="grid">
+            <div class="input-group"><label id="l-skills">المهارات</label><textarea id="inSkills" rows="2"></textarea></div>
+            <div class="input-group"><label id="l-lang">اللغات</label><textarea id="inLang" rows="2"></textarea></div>
+        </div>
+
+        <button class="btn-main" onclick="exportPDF()" id="b-download">تحميل السيرة الذاتية PDF</button>
     </div>
+</div>
 
-    <div id="toast"><i class="fas fa-sync fa-spin"></i> <span id="toast-text"></span></div>
-
-    <div id="pdf-render-zone">
-        <div id="pdf-template" class="pdf-page">
-            <div class="pdf-sidebar">
-                <div class="pdf-photo-frame"><img id="outPhoto"></div>
-                <div class="side-section">
-                    <div class="side-title" id="pdf-lbl-contact">اتصال</div>
-                    <div class="contact-item"><i class="fas fa-phone"></i> <span id="outPhone"></span></div>
-                    <div class="contact-item"><i class="fas fa-envelope"></i> <span id="outEmail"></span></div>
-                    <div class="contact-item"><i class="fas fa-map-marker-alt"></i> <span id="outAddress"></span></div>
-                    <div class="contact-item"><i class="fas fa-calendar"></i> <span id="outBirth"></span></div>
-                </div>
-                <div class="side-section">
-                    <div class="side-title" id="pdf-lbl-skills-side">المهارات</div>
-                    <div id="outSkills" style="font-size:11px; opacity:0.9; line-height:1.6;"></div>
-                </div>
-                <div class="side-section">
-                    <div class="side-title" id="pdf-lbl-lang-side">اللغات</div>
-                    <div id="outLang" style="font-size:11px; opacity:0.9; line-height:1.6;"></div>
-                </div>
-            </div>
-            <div class="pdf-content">
-                <div class="pdf-name-header">
-                    <h1 id="outName"></h1>
-                    <p id="outJob"></p>
-                </div>
-                <div class="main-section">
-                    <div class="main-title" id="pdf-lbl-about">الملف الشخصي</div>
-                    <div id="outAbout" class="pdf-text"></div>
-                </div>
-                <div class="main-section">
-                    <div class="main-title" id="pdf-lbl-exp">الخبرة المهنية</div>
-                    <div id="outExp" class="pdf-text"></div>
-                </div>
-                <div class="main-section">
-                    <div class="main-title" id="pdf-lbl-edu">التعليم</div>
-                    <div id="outEdu" class="pdf-text"></div>
-                </div>
-            </div>
+<div id="pdf-render-zone">
+    <div id="pdf-canvas" class="pdf-page">
+        <div class="pdf-sidebar">
+            <div style="width:130px; height:130px; border-radius:50%; background:#eee; margin:0 auto 30px;"></div>
+            <h3 id="ph-contact" style="color:var(--accent)">اتصال</h3>
+            <p id="outPhone" style="font-size:12px"></p>
+            <p id="outEmail" style="font-size:12px"></p>
+            <h3 id="ph-skills" style="color:var(--accent); margin-top:40px;">المهارات</h3>
+            <p id="outSkills" style="font-size:12px"></p>
+            <h3 id="ph-lang" style="color:var(--accent); margin-top:40px;">اللغات</h3>
+            <p id="outLang" style="font-size:12px"></p>
+        </div>
+        <div class="pdf-content">
+            <h1 id="outName" style="font-size:35px; margin:0;"></h1>
+            <h2 id="outJob" style="color:var(--accent); margin:5px 0 40px;"></h2>
+            <div class="pdf-h" id="ph-about">الملف الشخصي</div>
+            <p id="outAbout" style="white-space:pre-line; font-size:13px;"></p>
+            <div class="pdf-h" id="ph-exp">الخبرة العملية</div>
+            <p id="outExp" style="white-space:pre-line; font-size:13px;"></p>
         </div>
     </div>
+</div>
 
-    <script>
-        const fields = ['inName', 'inJob', 'inBirth', 'inAddress', 'inPhone', 'inEmail', 'inAbout', 'inExp', 'inEdu', 'inSkills', 'inLang'];
-        let currentLang = 'ar';
+<script>
+    const dictionary = {
+        ar: { personal: "المعلومات الشخصية", career: "المسيرة والخبرات", name: "الاسم الكامل", job: "المسمى الوظيفي", phone: "رقم الهاتف", email: "البريد الإلكتروني", about: "النبذة التعريفية", exp: "الخبرات المهنية", skills: "المهارات", lang: "اللغات", download: "تحميل السيرة الذاتية PDF", contact: "اتصال", profile: "الملف الشخصي" },
+        en: { personal: "Personal Details", career: "Career & Experience", name: "Full Name", job: "Job Title", phone: "Phone", email: "Email", about: "Summary", exp: "Work Experience", skills: "Skills", lang: "Languages", download: "Download CV (PDF)", contact: "Contact", profile: "Profile" },
+        fr: { personal: "Infos Personnelles", career: "Parcours et Expérience", name: "Nom Complet", job: "Titre du Poste", phone: "Téléphone", email: "E-mail", about: "Résumé", exp: "Expérience", skills: "Compétences", lang: "Langues", download: "Télécharger PDF", contact: "Contact", profile: "Profil" },
+        it: { personal: "Info Personali", career: "Esperienza", name: "Nome Completo", job: "Titolo", phone: "Telefono", email: "Email", about: "Profilo", exp: "Esperienza Lavorativa", skills: "Abilità", lang: "Lingue", download: "Scarica PDF", contact: "Contatti", profile: "Sommario" },
+        de: { personal: "Persönliche Daten", career: "Erfahrung", name: "Name", job: "Beruf", phone: "Telefon", email: "E-Mail", about: "Über mich", exp: "Berufserfahrung", skills: "Fähigkeiten", lang: "Sprachen", download: "PDF Herunterladen", contact: "Kontakt", profile: "Profil" }
+    };
 
-        const translations = {
-            ar: { welcome: "أهلاً بك في CV FORGE ✨", sub: "صمم سيرتك الذاتية العالمية بخمس لغات وبتصميم PDF احترافي.", personal: "المعلومات الشخصية", career: "المسيرة والخبرات", name: "الاسم الكامل", job: "المسمى الوظيفي", birth: "تاريخ الميلاد", address: "العنوان", phone: "رقم الهاتف", email: "البريد الإلكتروني", photo: "الصورة الشخصية", about: "النبذة التعريفية", exp: "الخبرات العملية", edu: "التعليم", skills: "المهارات", lang: "اللغات", download: "تحميل السيرة الذاتية (PDF)", contact: "اتصال", toast_start: "جاري تحضير ملفك...", toast_end: "تم التحميل بنجاح!" },
-            en: { welcome: "Welcome to CV FORGE ✨", sub: "Design your global CV in 5 languages with pro PDF design.", personal: "Personal Information", career: "Career & Experience", name: "Full Name", job: "Job Title", birth: "Birth Date", address: "Address", phone: "Phone Number", email: "Email Address", photo: "Profile Photo", about: "Professional Summary", exp: "Work Experience", edu: "Education", skills: "Skills", lang: "Languages", download: "Download CV (PDF)", contact: "Contact", toast_start: "Preparing your file...", toast_end: "Download complete!" },
-            fr: { welcome: "Bienvenue sur CV FORGE ✨", sub: "Créez votre CV en 5 langues avec un design PDF pro.", personal: "Informations Personnelles", career: "Expérience et Carrière", name: "Nom Complet", job: "Titre du Poste", birth: "Date de Naissance", address: "Adresse", phone: "Numéro de Téléphone", email: "Adresse E-mail", photo: "Photo de Profil", about: "Résumé Professionnel", exp: "Expérience Professionnelle", edu: "Éducation", skills: "Compétences", lang: "Langues", download: "Télécharger le CV (PDF)", contact: "Contact", toast_start: "Préparation du fichier...", toast_end: "Téléchargement réussi!" },
-            it: { welcome: "Benvenuti su CV FORGE ✨", sub: "Crea il tuo CV in 5 lingue con un design PDF professionale.", personal: "Informazioni Personali", career: "Esperienza e Carriera", name: "Nome Completo", job: "Titolo di Lavoro", birth: "Data di Nascita", address: "Indirizzo", phone: "Numero di Telefono", email: "Indirizzo Email", photo: "Foto Profilo", about: "Profilo Professionale", exp: "Esperienza Lavorativa", edu: "Istruzione", skills: "Abilità", lang: "Lingue", download: "Scarica il CV (PDF)", contact: "Contatti", toast_start: "Preparazione del file...", toast_end: "Scaricato con successo!" },
-            de: { welcome: "Willkommen bei CV FORGE ✨", sub: "Erstellen Sie Ihren Lebenslauf in 5 Sprachen mit Profi-PDF-Design.", personal: "Persönliche Informationen", career: "Erfahrung & Karriere", name: "Vollständiger Name", job: "Berufsbezeichnung", birth: "Geburtsdatum", address: "Adresse", phone: "Telefonnummer", email: "E-Mail-Adresse", photo: "Profilfoto", about: "Berufliches Profil", exp: "Berufserfahrung", edu: "Ausbildung", skills: "Fähigkeiten", lang: "Sprachen", download: "Lebenslauf herunterladen (PDF)", contact: "Kontakt", toast_start: "Datei wird vorbereitet...", toast_end: "Erfolgreich heruntergeladen!" }
-        };
+    let activeL = 'ar';
 
-        function changeLang(lang, btn) {
-            currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            const isAr = lang === 'ar';
-            document.getElementById('pdf-template').className = isAr ? 'pdf-page' : 'pdf-page ltr';
-            document.body.dir = isAr ? "rtl" : "ltr";
-            
-            const t = translations[lang];
-            
-            // UI Update
-            document.getElementById('txt-welcome').innerText = t.welcome;
-            document.getElementById('txt-subwelcome').innerText = t.sub;
-            document.getElementById('txt-personal').innerText = t.personal;
-            document.getElementById('txt-career').innerText = t.career;
-            document.getElementById('lbl-name').innerText = t.name;
-            document.getElementById('lbl-job').innerText = t.job;
-            document.getElementById('lbl-birth').innerText = t.birth;
-            document.getElementById('lbl-address').innerText = t.address;
-            document.getElementById('lbl-phone').innerText = t.phone;
-            document.getElementById('lbl-email').innerText = t.email;
-            document.getElementById('lbl-photo').innerText = t.photo;
-            document.getElementById('lbl-about').innerText = t.about;
-            document.getElementById('lbl-exp').innerText = t.exp;
-            document.getElementById('lbl-edu').innerText = t.edu;
-            document.getElementById('lbl-skills').innerText = t.skills;
-            document.getElementById('lbl-lang').innerText = t.lang;
-            document.getElementById('txt-download').innerText = t.download;
+    function updateLang(l, btn) {
+        activeL = l;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const isRtl = l === 'ar';
+        document.body.dir = isRtl ? 'rtl' : 'ltr';
+        document.getElementById('pdf-canvas').className = isRtl ? 'pdf-page' : 'pdf-page ltr';
+        
+        const d = dictionary[l];
+        document.getElementById('t-personal').innerText = d.personal;
+        document.getElementById('t-career').innerText = d.career;
+        document.getElementById('l-name').innerText = d.name;
+        document.getElementById('l-job').innerText = d.job;
+        document.getElementById('l-phone').innerText = d.phone;
+        document.getElementById('l-email').innerText = d.email;
+        document.getElementById('l-about').innerText = d.about;
+        document.getElementById('l-exp').innerText = d.exp;
+        document.getElementById('l-skills').innerText = d.skills;
+        document.getElementById('l-lang').innerText = d.lang;
+        document.getElementById('b-download').innerText = d.download;
 
-            // PDF Update
-            document.getElementById('pdf-lbl-contact').innerText = t.contact;
-            document.getElementById('pdf-lbl-about').innerText = t.about;
-            document.getElementById('pdf-lbl-exp').innerText = t.exp;
-            document.getElementById('pdf-lbl-edu').innerText = t.edu;
-            document.getElementById('pdf-lbl-skills-side').innerText = t.skills;
-            document.getElementById('pdf-lbl-lang-side').innerText = t.lang;
-        }
+        // PDF Titles
+        document.getElementById('ph-contact').innerText = d.contact;
+        document.getElementById('ph-skills').innerText = d.skills;
+        document.getElementById('ph-lang').innerText = d.lang;
+        document.getElementById('ph-about').innerText = d.profile;
+        document.getElementById('ph-exp').innerText = d.exp;
+    }
 
-        function showToast(text) {
-            const t = document.getElementById('toast');
-            document.getElementById('toast-text').innerText = text;
-            t.style.display = 'flex';
-            setTimeout(() => t.style.display = 'none', 3000);
-        }
+    async function exportPDF() {
+        const fields = ['Name', 'Job', 'Phone', 'Email', 'About', 'Exp', 'Skills', 'Lang'];
+        fields.forEach(f => { document.getElementById('out' + f).innerText = document.getElementById('in' + f).value; });
 
-        async function exportCV() {
-            showToast(translations[currentLang].toast_start);
-            fields.forEach(f => {
-                const outId = f.replace('in', 'out');
-                if(document.getElementById(outId)) document.getElementById(outId).innerText = document.getElementById(f).value;
-            });
-
-            setTimeout(async () => {
-                const canvas = await html2canvas(document.getElementById('pdf-template'), { scale: 3, useCORS: true });
-                const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
-                pdf.save(`CV_${currentLang}.pdf`);
-                showToast(translations[currentLang].toast_end);
-            }, 1000);
-        }
-
-        function save() { fields.forEach(f => localStorage.setItem(f, document.getElementById(f).value)); }
-        function load() { fields.forEach(f => { if(localStorage.getItem(f)) document.getElementById(f).value = localStorage.getItem(f); }); }
-        function toggleTheme() { document.body.classList.toggle('dark-mode'); }
-        document.getElementById('inPhoto').onchange = e => {
-            const r = new FileReader(); r.onload = () => document.getElementById('outPhoto').src = r.result; r.readAsDataURL(e.target.files[0]);
-        };
-        window.onload = load;
-    </script>
+        const canvas = await html2canvas(document.getElementById('pdf-canvas'), { scale: 3 });
+        const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
+        pdf.save(`CV_Premium_${activeL}.pdf`);
+    }
+</script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cv Forge | AI Optimizer Edition</title>
+    <title>Cv Forge | Elite AI Optimizer</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -30,36 +30,18 @@
         * { box-sizing: border-box; transition: 0.2s; }
         body { margin: 0; padding: 0; background: var(--bg-grad); font-family: 'Cairo', sans-serif; color: var(--text-main); line-height: 1.4; }
 
-        header { 
-            padding: 12px 25px; background: var(--input-bg);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
+        header { padding: 12px 25px; background: var(--input-bg); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
         .palette-btn { width: 36px; height: 36px; border-radius: 8px; border: none; background: var(--accent); color: white; cursor: pointer; }
-        .lang-switch { display: flex; background: var(--bg-grad); border-radius: 8px; padding: 3px; border: 1px solid var(--input-border); }
-        .lang-btn { padding: 5px 10px; border-radius: 6px; border: none; cursor: pointer; font-size: 11px; font-weight: 800; color: var(--text-muted); background: transparent; }
-        .lang-btn.active { background: var(--accent); color: white; }
-
         .app-wrapper { width: 100%; max-width: 800px; margin: 20px auto; padding: 0 15px; }
         .main-card { background: var(--card-bg); border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
-        
         .section-label { font-size: 12px; font-weight: 800; color: var(--accent); margin: 20px 0 12px; display: flex; align-items: center; gap: 8px; }
         .section-label::after { content: ""; flex: 1; height: 1px; background: var(--input-border); }
-
         .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .input-group { margin-bottom: 12px; position: relative; }
         label { display: block; font-weight: 700; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
         input, textarea { width: 100%; padding: 10px; border: 1px solid var(--input-border); border-radius: 10px; font-family: inherit; background: var(--input-bg); color: var(--text-main); font-size: 13.5px; }
 
-        /* زر تحسين النص */
-        .ai-magic-btn { 
-            position: absolute; left: 10px; top: 0; background: var(--primary); color: var(--accent);
-            border: none; border-radius: 5px; font-size: 10px; padding: 2px 8px; cursor: pointer;
-            font-weight: bold; display: flex; align-items: center; gap: 4px; z-index: 5;
-        }
-        .ai-magic-btn:hover { background: var(--accent); color: white; }
-
+        .ai-magic-btn { position: absolute; left: 10px; top: 0; background: var(--primary); color: var(--accent); border: none; border-radius: 5px; font-size: 10px; padding: 2px 8px; cursor: pointer; font-weight: bold; z-index: 5; }
         .btn-download { width: 100%; padding: 16px; background: var(--accent); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
         #status-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; color: white; flex-direction: column; backdrop-filter: blur(5px); }
@@ -76,7 +58,6 @@
         .pdf-divider { height: 3px; background: var(--accent); margin-bottom: 15px; width: 100%; border-radius: 2px; }
         .pdf-badge { background: var(--primary); color: white; padding: 8px; border-radius: 6px; font-weight: 800; font-size: 13px; margin-bottom: 15px; text-align: center; }
         .content-text { white-space: pre-line; line-height: 1.6; font-size: 14px; color: #1e293b; }
-        .side-item { margin-bottom: 15px; font-size: 12px; }
     </style>
 </head>
 <body id="body-tag">
@@ -85,10 +66,6 @@
         <div style="font-family:'Almarai'; font-weight:900; font-size:20px;">CV <span style="color:var(--accent)">FORGE</span></div>
         <div style="display:flex; gap:10px;">
             <button class="palette-btn" onclick="generatePalette()"><i class="fas fa-palette"></i></button>
-            <div class="lang-switch">
-                <button class="lang-btn active" id="btn-ar" onclick="handleTranslate('ar')">AR</button>
-                <button class="lang-btn" id="btn-en" onclick="handleTranslate('en')">EN</button>
-            </div>
             <button onclick="toggleTheme()" style="background:none; border:none; color:var(--accent); cursor:pointer;"><i class="fas fa-moon"></i></button>
         </div>
     </header>
@@ -140,7 +117,7 @@
     <div id="status-overlay">
         <div class="loader-box">
             <i class="fas fa-magic fa-spin" style="font-size:30px; color:var(--accent); margin-bottom:15px;"></i>
-            <div id="status-text" style="font-weight:bold;">جاري معالجة البيانات...</div>
+            <div id="status-text" style="font-weight:bold;">جاري التفكير في صياغة أفضل...</div>
         </div>
     </div>
 
@@ -152,14 +129,14 @@
             </div>
             <div class="pdf-body">
                 <div class="pdf-main">
-                    <section><div class="pdf-section-title" id="pdf-label-exp">الخبرات المهنية</div><div class="pdf-divider"></div><div id="outExp" class="content-text"></div></section>
-                    <section><div class="pdf-section-title" id="pdf-label-edu">التعليم</div><div class="pdf-divider"></div><div id="outEdu" class="content-text"></div></section>
-                    <section><div class="pdf-section-title" id="pdf-label-skills">المهارات والقدرات</div><div class="pdf-divider"></div><div id="outSkills" class="content-text"></div></section>
+                    <section><div class="pdf-section-title">الخبرات المهنية</div><div class="pdf-divider"></div><div id="outExp" class="content-text"></div></section>
+                    <section><div class="pdf-section-title">التعليم</div><div class="pdf-divider"></div><div id="outEdu" class="content-text"></div></section>
+                    <section><div class="pdf-section-title">المهارات والقدرات</div><div class="pdf-divider"></div><div id="outSkills" class="content-text"></div></section>
                 </div>
                 <div class="pdf-side">
-                    <div><div class="pdf-badge" id="pdf-label-about">الملف الشخصي</div><div id="outAbout" style="font-size:12px; line-height:1.6; margin-bottom:30px;"></div></div>
-                    <div><div class="pdf-badge" id="pdf-label-contact">بيانات التواصل</div><div class="side-item">📅 <span id="outBirth"></span></div><div class="side-item">📍 <span id="outAddress"></span></div><div class="side-item">📞 <span id="outPhone"></span></div><div class="side-item">✉️ <span id="outEmail"></span></div></div>
-                    <div><div class="pdf-badge" id="pdf-label-lang">اللغات</div><div id="outLang" style="font-size:14px; text-align:center; font-weight:bold; color:var(--primary);"></div></div>
+                    <div><div class="pdf-badge">الملف الشخصي</div><div id="outAbout" style="font-size:12px; line-height:1.6; margin-bottom:30px;"></div></div>
+                    <div><div class="pdf-badge">بيانات التواصل</div><div style="font-size:11px; margin-bottom:10px;">📅 <span id="outBirth"></span></div><div style="font-size:11px; margin-bottom:10px;">📍 <span id="outAddress"></span></div><div style="font-size:11px; margin-bottom:10px;">📞 <span id="outPhone"></span></div><div style="font-size:11px;">✉️ <span id="outEmail"></span></div></div>
+                    <div><div class="pdf-badge">اللغات</div><div id="outLang" style="font-size:14px; text-align:center; font-weight:bold; color:var(--primary);"></div></div>
                 </div>
             </div>
         </div>
@@ -169,24 +146,28 @@
         const fields = ['inName', 'inJob', 'inBirth', 'inAddress', 'inPhone', 'inEmail', 'inAbout', 'inExp', 'inEdu', 'inSkills', 'inLang'];
         
         async function improveText(fieldId) {
-            const val = document.getElementById(fieldId).value;
-            if(!val) return;
+            const el = document.getElementById(fieldId);
+            const val = el.value;
+            if(!val || val.length < 5) return;
+            
             const over = document.getElementById('status-overlay');
             over.style.display = 'flex';
-            document.getElementById('status-text').innerText = "جاري تحويل النص إلى صياغة احترافية...";
             
             try {
-                // استخدام وسيط ترجمة لتحسين الصياغة (طريقة ذكية بدون مفاتيح API معقدة)
-                const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ar&dt=t&q=${encodeURI("صغ هذا الكلام بشكل احترافي للسي في: " + val)}`);
+                const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ar&dt=t&q=${encodeURI("صغ هذا الكلام بشكل احترافي جداً لسيرة ذاتية: " + val)}`);
                 const data = await res.json();
-                document.getElementById(fieldId).value = data[0][0][0].replace("صغ هذا الكلام بشكل احترافي للسي في: ", "");
+                let improved = data[0][0][0];
+                // إزالة الجملة التمهيدية إذا وجدت
+                improved = improved.replace(/صغ هذا الكلام بشكل احترافي جداً لسيرة ذاتية:|تحسين النص:|النتيجة:/g, "").trim();
+                el.value = improved;
                 save();
-            } catch(e) {}
+            } catch(e) { console.error(e); }
             over.style.display = 'none';
         }
 
         function generatePalette() {
-            const p = [{p:'#0f172a', a:'#38bdf8'}, {p:'#1e3a8a', a:'#fbbf24'}, {p:'#064e3b', a:'#34d399'}][Math.floor(Math.random()*3)];
+            const colors = [{p:'#0f172a', a:'#38bdf8'}, {p:'#1e3a8a', a:'#fbbf24'}, {p:'#064e3b', a:'#34d399'}];
+            const p = colors[Math.floor(Math.random()*colors.length)];
             document.documentElement.style.setProperty('--primary', p.p);
             document.documentElement.style.setProperty('--accent', p.a);
             document.getElementById('pdf-header').style.backgroundColor = p.p;
@@ -197,21 +178,14 @@
                 const out = document.getElementById(f.replace('in', 'out'));
                 if(out) out.innerText = document.getElementById(f).value;
             });
-
-            // ضبط ذكي للمساحة
             const expLen = document.getElementById('inExp').value.length;
-            document.querySelectorAll('.content-text').forEach(d => {
-                d.style.fontSize = expLen < 200 ? "17px" : "14px";
-            });
-
+            document.querySelectorAll('.content-text').forEach(d => { d.style.fontSize = expLen < 200 ? "17px" : "14px"; });
             document.getElementById('status-overlay').style.display = 'flex';
-            document.getElementById('status-text').innerText = "جاري حفظ السيرة الذاتية...";
-
             setTimeout(async () => {
                 const canvas = await html2canvas(document.getElementById('pdf-template'), { scale: 2 });
                 const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
-                pdf.save(`Professional_CV.pdf`);
+                pdf.save(`CV_Professional.pdf`);
                 document.getElementById('status-overlay').style.display = 'none';
             }, 1000);
         }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cv Forge | Auto-Fill Edition</title>
+    <title>Cv Forge | Professional Edition</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -31,26 +31,24 @@
         body { margin: 0; padding: 0; background: var(--bg-grad); font-family: 'Cairo', sans-serif; color: var(--text-main); line-height: 1.4; }
 
         header { 
-            width: 100%; padding: 12px 25px; background: var(--input-bg);
+            width: 100%; padding: 10px 25px; background: var(--input-bg);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
         }
-        
-        .palette-wrapper { position: relative; display: flex; align-items: center; }
-        .palette-hint {
-            position: absolute; right: 45px; background: var(--accent); color: white;
-            font-size: 10px; padding: 3px 8px; border-radius: 4px; white-space: nowrap;
-            animation: bounce 2s infinite; font-weight: bold; pointer-events: none;
-        }
-        @keyframes bounce { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-5px); } }
 
-        .palette-btn { width: 36px; height: 36px; border-radius: 8px; border: none; background: var(--accent); color: white; cursor: pointer; font-size: 16px; }
+        .logo-img { height: 45px; width: auto; border-radius: 8px; }
 
+        /* رسالة ترحيبية */
+        .welcome-section { text-align: center; padding: 20px 15px 10px; }
+        .welcome-section h2 { margin: 0; font-size: 22px; color: var(--primary); font-weight: 900; }
+        .welcome-section p { margin: 5px 0; color: var(--text-muted); font-size: 14px; font-weight: 600; }
+
+        .palette-btn { width: 36px; height: 36px; border-radius: 8px; border: none; background: var(--accent); color: white; cursor: pointer; }
         .lang-switch { display: flex; background: var(--bg-grad); border-radius: 8px; padding: 3px; border: 1px solid var(--input-border); }
         .lang-btn { padding: 5px 10px; border-radius: 6px; border: none; cursor: pointer; font-size: 11px; font-weight: 800; color: var(--text-muted); background: transparent; }
         .lang-btn.active { background: var(--accent); color: white; }
 
-        .app-wrapper { width: 100%; max-width: 800px; margin: 20px auto; padding: 0 15px; }
+        .app-wrapper { width: 100%; max-width: 800px; margin: 0 auto 20px; padding: 0 15px; }
         .main-card { background: var(--card-bg); border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
         
         .section-label { font-size: 12px; font-weight: 800; color: var(--accent); margin: 20px 0 12px; display: flex; align-items: center; gap: 8px; }
@@ -61,50 +59,43 @@
         label { display: block; font-weight: 700; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
         input, textarea { width: 100%; padding: 10px; border: 1px solid var(--input-border); border-radius: 10px; font-family: inherit; background: var(--input-bg); color: var(--text-main); font-size: 13.5px; }
 
-        .btn-download { width: 100%; padding: 16px; background: var(--accent); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .btn-download { width: 100%; padding: 16px; background: var(--accent); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
         #status-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; color: white; flex-direction: column; backdrop-filter: blur(5px); }
         .loader-box { background: var(--input-bg); color: var(--text-main); padding: 25px; border-radius: 20px; text-align: center; border: 2px solid var(--accent); width: 280px; }
 
-        /* --- PDF Template --- */
+        /* PDF Layout remains identical for stability */
         #pdf-render-zone { position: absolute; top: -20000px; left: -20000px; }
         .pdf-page { width: 210mm; height: 297mm; background: white; display: flex; flex-direction: column; color: #0f172a; font-family: 'Cairo', sans-serif; overflow: hidden; }
-        
         .pdf-header { background: var(--primary); padding: 40px 50px; color: white; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-        .pdf-body { display: grid; grid-template-columns: 1.55fr 1fr; flex-grow: 1; min-height: 0; }
-        
+        .pdf-body { display: grid; grid-template-columns: 1.55fr 1fr; flex-grow: 1; }
         .pdf-main { padding: 30px 40px; display: flex; flex-direction: column; justify-content: space-around; flex-grow: 1; }
         .pdf-side { background: #f8fafc; padding: 30px; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; }
-        
         .pdf-section-title { color: var(--primary); font-size: 18px; font-weight: 900; margin-bottom: 5px; }
-        .pdf-divider { height: 3px; background: var(--accent); margin-bottom: 15px; width: 100%; border-radius: 2px; }
+        .pdf-divider { height: 3px; background: var(--accent); margin-bottom: 15px; border-radius: 2px; }
         .pdf-badge { background: var(--primary); color: white; padding: 8px; border-radius: 6px; font-weight: 800; font-size: 13px; margin-bottom: 15px; text-align: center; }
-
         .content-text { white-space: pre-line; line-height: 1.6; font-size: 14px; color: #1e293b; }
-        .side-item { margin-bottom: 15px; font-size: 12px; }
-
-        .pdf-page.ltr { direction: ltr; }
-        .pdf-page.ltr .pdf-side { border-right: none; border-left: 1px solid #e2e8f0; }
     </style>
 </head>
 <body id="body-tag">
 
     <header>
-        <div style="font-family:'Almarai'; font-weight:900; font-size:20px;">CV <span style="color:var(--accent)">FORGE</span></div>
-        <div class="header-actions">
-            <div class="palette-wrapper">
-                <span class="palette-hint" id="p-hint">غير الألوان!</span>
-                <button class="palette-btn" onclick="generatePalette()"><i class="fas fa-palette"></i></button>
-            </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="CV Logo" class="logo-img">
+        
+        <div style="display:flex; gap:10px; align-items:center;">
+            <button class="palette-btn" onclick="generatePalette()"><i class="fas fa-palette"></i></button>
             <div class="lang-switch">
                 <button class="lang-btn active" id="btn-ar" onclick="handleTranslate('ar')">AR</button>
                 <button class="lang-btn" id="btn-en" onclick="handleTranslate('en')">EN</button>
             </div>
-            <div style="cursor:pointer; color:var(--accent); font-size:18px;" onclick="toggleTheme()">
-                <i id="theme-icon" class="fas fa-moon"></i>
-            </div>
+            <i id="theme-icon" class="fas fa-moon" style="cursor:pointer; color:var(--accent);" onclick="toggleTheme()"></i>
         </div>
     </header>
+
+    <div class="welcome-section">
+        <h2 id="welcome-title">أهلاً بك في CV FORGE ✨</h2>
+        <p id="welcome-desc">اصنع سيرتك الذاتية الاحترافية في دقيقة واحدة وبشكل مجاني تماماً.</p>
+    </div>
 
     <div class="app-wrapper">
         <div class="main-card">
@@ -141,61 +132,27 @@
 
     <div id="status-overlay">
         <div class="loader-box">
-            <i class="fas fa-circle-notch fa-spin" style="font-size:30px; color:var(--accent); margin-bottom:15px;"></i>
-            <div id="status-text" style="font-weight:bold;">جاري معالجة البيانات...</div>
+            <i class="fas fa-cog fa-spin" style="font-size:30px; color:var(--accent); margin-bottom:15px;"></i>
+            <div id="status-text">جاري المعالجة...</div>
         </div>
     </div>
 
     <div id="pdf-render-zone">
         <div id="pdf-template" class="pdf-page">
             <div id="pdf-header" class="pdf-header">
-                <div>
-                    <h1 id="outName" style="font-size:42px; margin:0;"></h1>
-                    <p id="outJob" style="font-size:22px; opacity:0.9; margin:5px 0 0;"></p>
-                </div>
-                <div style="width:140px; height:140px; border-radius:15px; border:4px solid white; overflow:hidden; background:#eee;">
-                    <img id="outPhoto" style="width:100%; height:100%; object-fit:cover;">
-                </div>
+                <div><h1 id="outName" style="font-size:42px; margin:0;"></h1><p id="outJob" style="font-size:22px; opacity:0.9; margin:5px 0 0;"></p></div>
+                <div style="width:140px; height:140px; border-radius:15px; border:4px solid white; overflow:hidden; background:#eee;"><img id="outPhoto" style="width:100%; height:100%; object-fit:cover;"></div>
             </div>
             <div class="pdf-body">
                 <div class="pdf-main">
-                    <section>
-                        <div id="pdf-label-exp" class="pdf-section-title">الخبرات المهنية</div>
-                        <div class="pdf-divider"></div>
-                        <div id="outExp" class="content-text"></div>
-                    </section>
-                    
-                    <section>
-                        <div id="pdf-label-edu" class="pdf-section-title">التعليم</div>
-                        <div class="pdf-divider"></div>
-                        <div id="outEdu" class="content-text"></div>
-                    </section>
-
-                    <section>
-                        <div id="pdf-label-skills" class="pdf-section-title">المهارات والقدرات</div>
-                        <div class="pdf-divider"></div>
-                        <div id="outSkills" class="content-text"></div>
-                    </section>
+                    <section><div id="pdf-label-exp" class="pdf-section-title">الخبرات المهنية</div><div class="pdf-divider"></div><div id="outExp" class="content-text"></div></section>
+                    <section><div id="pdf-label-edu" class="pdf-section-title">التعليم</div><div class="pdf-divider"></div><div id="outEdu" class="content-text"></div></section>
+                    <section><div id="pdf-label-skills" class="pdf-section-title">المهارات والقدرات</div><div class="pdf-divider"></div><div id="outSkills" class="content-text"></div></section>
                 </div>
-                
                 <div class="pdf-side">
-                    <div>
-                        <div id="pdf-label-about" class="pdf-badge">الملف الشخصي</div>
-                        <div id="outAbout" style="font-size:12px; line-height:1.6; margin-bottom:30px;"></div>
-                    </div>
-                    
-                    <div>
-                        <div id="pdf-label-contact" class="pdf-badge">بيانات التواصل</div>
-                        <div class="side-item">📅 <span id="outBirth"></span></div>
-                        <div class="side-item">📍 <span id="outAddress"></span></div>
-                        <div class="side-item">📞 <span id="outPhone"></span></div>
-                        <div class="side-item">✉️ <span id="outEmail"></span></div>
-                    </div>
-
-                    <div>
-                        <div id="pdf-label-lang" class="pdf-badge">اللغات</div>
-                        <div id="outLang" style="font-size:14px; text-align:center; font-weight:bold; color:var(--primary);"></div>
-                    </div>
+                    <div><div id="pdf-label-about" class="pdf-badge">الملف الشخصي</div><div id="outAbout" style="font-size:12px; line-height:1.6; margin-bottom:30px;"></div></div>
+                    <div><div id="pdf-label-contact" class="pdf-badge">بيانات التواصل</div><div style="font-size:11px; margin-bottom:10px;">📅 <span id="outBirth"></span></div><div style="font-size:11px; margin-bottom:10px;">📍 <span id="outAddress"></span></div><div style="font-size:11px; margin-bottom:10px;">📞 <span id="outPhone"></span></div><div style="font-size:11px;">✉️ <span id="outEmail"></span></div></div>
+                    <div><div id="pdf-label-lang" class="pdf-badge">اللغات</div><div id="outLang" style="font-size:14px; text-align:center; font-weight:bold; color:var(--primary);"></div></div>
                 </div>
             </div>
         </div>
@@ -203,32 +160,13 @@
 
     <script>
         let currentLang = 'ar';
-        const palettes = [
-            { primary: '#0f172a', accent: '#38bdf8' },
-            { primary: '#1e3a8a', accent: '#fbbf24' },
-            { primary: '#064e3b', accent: '#34d399' },
-            { primary: '#431407', accent: '#f97316' }
-        ];
-        let pIndex = 0;
         const fields = ['inName', 'inJob', 'inBirth', 'inAddress', 'inPhone', 'inEmail', 'inAbout', 'inExp', 'inEdu', 'inSkills', 'inLang'];
-
-        function generatePalette() {
-            document.getElementById('p-hint').style.display = 'none';
-            pIndex = (pIndex + 1) % palettes.length;
-            const p = palettes[pIndex];
-            document.documentElement.style.setProperty('--primary', p.primary);
-            document.documentElement.style.setProperty('--accent', p.accent);
-            document.getElementById('pdf-header').style.backgroundColor = p.primary;
-            document.querySelectorAll('.pdf-divider').forEach(d => d.style.backgroundColor = p.accent);
-            document.querySelectorAll('.pdf-badge').forEach(b => b.style.backgroundColor = p.primary);
-        }
 
         async function handleTranslate(lang) {
             if(lang === currentLang) return;
             const over = document.getElementById('status-overlay');
             over.style.display = 'flex';
-            document.getElementById('status-text').innerText = "جاري الترجمة...";
-
+            
             for(let id of fields) {
                 if(['inPhone', 'inEmail', 'inBirth'].includes(id)) continue;
                 let val = document.getElementById(id).value;
@@ -246,9 +184,11 @@
             document.getElementById('pdf-template').classList.toggle('ltr', lang === 'en');
             
             const labels = {
-                en: { exp:"Professional Experience", edu:"Education", skills:"Skills & Abilities", about:"Profile Summary", contact:"Contact Details", lang:"Languages" },
-                ar: { exp:"الخبرات المهنية", edu:"التعليم", skills:"المهارات والقدرات", about:"الملف الشخصي", contact:"بيانات التواصل", lang:"اللغات" }
+                en: { title: "Welcome to CV FORGE ✨", desc: "Create your professional CV in one minute, completely free.", exp:"Professional Experience", edu:"Education", skills:"Skills", about:"Profile", contact:"Contact", lang:"Languages" },
+                ar: { title: "أهلاً بك في CV FORGE ✨", desc: "اصنع سيرتك الذاتية الاحترافية في دقيقة واحدة وبشكل مجاني تماماً.", exp:"الخبرات المهنية", edu:"التعليم", skills:"المهارات والقدرات", about:"الملف الشخصي", contact:"بيانات التواصل", lang:"اللغات" }
             };
+            document.getElementById('welcome-title').innerText = labels[lang].title;
+            document.getElementById('welcome-desc').innerText = labels[lang].desc;
             document.getElementById('pdf-label-exp').innerText = labels[lang].exp;
             document.getElementById('pdf-label-edu').innerText = labels[lang].edu;
             document.getElementById('pdf-label-skills').innerText = labels[lang].skills;
@@ -260,36 +200,37 @@
             save();
         }
 
-        function save() { fields.forEach(f => localStorage.setItem(f, document.getElementById(f).value)); }
-        function load() { fields.forEach(f => { if(localStorage.getItem(f)) document.getElementById(f).value = localStorage.getItem(f); }); }
-        function toggleTheme() { document.getElementById('body-tag').classList.toggle('dark-mode'); }
-
-        document.getElementById('inPhoto').onchange = e => {
-            const r = new FileReader(); r.onload = () => document.getElementById('outPhoto').src = r.result; r.readAsDataURL(e.target.files[0]);
-        };
+        function generatePalette() {
+            const p = [{p:'#0f172a', a:'#38bdf8'}, {p:'#1e3a8a', a:'#fbbf24'}, {p:'#064e3b', a:'#34d399'}][Math.floor(Math.random()*3)];
+            document.documentElement.style.setProperty('--primary', p.p);
+            document.documentElement.style.setProperty('--accent', p.a);
+            document.getElementById('pdf-header').style.backgroundColor = p.p;
+        }
 
         async function exportCV() {
             fields.forEach(f => {
                 const outId = f.replace('in', 'out');
                 if(document.getElementById(outId)) document.getElementById(outId).innerText = document.getElementById(f).value;
             });
-
-            const expText = document.getElementById('inExp').value;
-            const contentDivs = document.querySelectorAll('.content-text');
-            contentDivs.forEach(d => d.style.fontSize = expText.length < 150 ? "17px" : "14px");
-
-            const over = document.getElementById('status-overlay');
-            over.style.display = 'flex';
-            document.getElementById('status-text').innerText = "جاري إنشاء ملف PDF...";
-
+            const expLen = document.getElementById('inExp').value.length;
+            document.querySelectorAll('.content-text').forEach(d => d.style.fontSize = expLen < 150 ? "17px" : "14px");
+            
+            document.getElementById('status-overlay').style.display = 'flex';
             setTimeout(async () => {
                 const canvas = await html2canvas(document.getElementById('pdf-template'), { scale: 2 });
                 const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
-                pdf.save(`My_Professional_CV.pdf`);
-                over.style.display = 'none';
+                pdf.save(`CV_Professional.pdf`);
+                document.getElementById('status-overlay').style.display = 'none';
             }, 1000);
         }
+
+        function save() { fields.forEach(f => localStorage.setItem(f, document.getElementById(f).value)); }
+        function load() { fields.forEach(f => { if(localStorage.getItem(f)) document.getElementById(f).value = localStorage.getItem(f); }); }
+        function toggleTheme() { document.getElementById('body-tag').classList.toggle('dark-mode'); }
+        document.getElementById('inPhoto').onchange = e => {
+            const r = new FileReader(); r.onload = () => document.getElementById('outPhoto').src = r.result; r.readAsDataURL(e.target.files[0]);
+        };
         window.onload = load;
     </script>
 </body>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cv Forge | Elite AI Optimizer</title>
+    <title>Cv Forge | Perfect AI Optimizer</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -32,6 +32,7 @@
 
         header { padding: 12px 25px; background: var(--input-bg); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
         .palette-btn { width: 36px; height: 36px; border-radius: 8px; border: none; background: var(--accent); color: white; cursor: pointer; }
+        
         .app-wrapper { width: 100%; max-width: 800px; margin: 20px auto; padding: 0 15px; }
         .main-card { background: var(--card-bg); border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
         .section-label { font-size: 12px; font-weight: 800; color: var(--accent); margin: 20px 0 12px; display: flex; align-items: center; gap: 8px; }
@@ -47,15 +48,15 @@
         #status-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; color: white; flex-direction: column; backdrop-filter: blur(5px); }
         .loader-box { background: var(--input-bg); color: var(--text-main); padding: 25px; border-radius: 20px; text-align: center; border: 2px solid var(--accent); width: 280px; }
 
-        /* --- PDF Template --- */
+        /* PDF Styling */
         #pdf-render-zone { position: absolute; top: -20000px; left: -20000px; }
         .pdf-page { width: 210mm; height: 297mm; background: white; display: flex; flex-direction: column; color: #0f172a; font-family: 'Cairo', sans-serif; overflow: hidden; }
         .pdf-header { background: var(--primary); padding: 40px 50px; color: white; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-        .pdf-body { display: grid; grid-template-columns: 1.55fr 1fr; flex-grow: 1; min-height: 0; }
+        .pdf-body { display: grid; grid-template-columns: 1.55fr 1fr; flex-grow: 1; }
         .pdf-main { padding: 30px 40px; display: flex; flex-direction: column; justify-content: space-around; flex-grow: 1; }
         .pdf-side { background: #f8fafc; padding: 30px; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; }
         .pdf-section-title { color: var(--primary); font-size: 18px; font-weight: 900; margin-bottom: 5px; }
-        .pdf-divider { height: 3px; background: var(--accent); margin-bottom: 15px; width: 100%; border-radius: 2px; }
+        .pdf-divider { height: 3px; background: var(--accent); margin-bottom: 15px; border-radius: 2px; }
         .pdf-badge { background: var(--primary); color: white; padding: 8px; border-radius: 6px; font-weight: 800; font-size: 13px; margin-bottom: 15px; text-align: center; }
         .content-text { white-space: pre-line; line-height: 1.6; font-size: 14px; color: #1e293b; }
     </style>
@@ -117,7 +118,7 @@
     <div id="status-overlay">
         <div class="loader-box">
             <i class="fas fa-magic fa-spin" style="font-size:30px; color:var(--accent); margin-bottom:15px;"></i>
-            <div id="status-text" style="font-weight:bold;">جاري التفكير في صياغة أفضل...</div>
+            <div id="status-text" style="font-weight:bold;">جاري معالجة طلبك...</div>
         </div>
     </div>
 
@@ -147,21 +148,32 @@
         
         async function improveText(fieldId) {
             const el = document.getElementById(fieldId);
-            const val = el.value;
-            if(!val || val.length < 5) return;
+            const originalText = el.value;
+            if(!originalText || originalText.trim().length < 5) {
+                alert("يرجى كتابة نص أولاً لتحسينه!");
+                return;
+            }
             
             const over = document.getElementById('status-overlay');
             over.style.display = 'flex';
+            document.getElementById('status-text').innerText = "جاري صياغة النص باحترافية...";
             
             try {
-                const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ar&dt=t&q=${encodeURI("صغ هذا الكلام بشكل احترافي جداً لسيرة ذاتية: " + val)}`);
+                // استخدام API الترجمة كأداة تحسين لغوي غير مباشرة
+                const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ar&dt=t&q=${encodeURI("صيغة احترافية لخبرة عمل: " + originalText)}`);
                 const data = await res.json();
-                let improved = data[0][0][0];
-                // إزالة الجملة التمهيدية إذا وجدت
-                improved = improved.replace(/صغ هذا الكلام بشكل احترافي جداً لسيرة ذاتية:|تحسين النص:|النتيجة:/g, "").trim();
-                el.value = improved;
-                save();
-            } catch(e) { console.error(e); }
+                
+                if (data && data[0] && data[0][0]) {
+                    let improvedText = data[0].map(x => x[0]).join('').replace(/صيغة احترافية لخبرة عمل:|النتيجة:|تحسين:|:/g, "").trim();
+                    if(improvedText && improvedText !== originalText) {
+                        el.value = improvedText;
+                        save();
+                    }
+                }
+            } catch(e) { 
+                console.error("AI Error:", e);
+                alert("حدث خطأ في الاتصال، حاول مرة أخرى.");
+            }
             over.style.display = 'none';
         }
 
@@ -179,13 +191,16 @@
                 if(out) out.innerText = document.getElementById(f).value;
             });
             const expLen = document.getElementById('inExp').value.length;
-            document.querySelectorAll('.content-text').forEach(d => { d.style.fontSize = expLen < 200 ? "17px" : "14px"; });
+            document.querySelectorAll('.content-text').forEach(d => { d.style.fontSize = expLen < 150 ? "17px" : "14px"; });
+            
             document.getElementById('status-overlay').style.display = 'flex';
+            document.getElementById('status-text').innerText = "جاري استخراج الملف...";
+            
             setTimeout(async () => {
                 const canvas = await html2canvas(document.getElementById('pdf-template'), { scale: 2 });
                 const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
-                pdf.save(`CV_Professional.pdf`);
+                pdf.save(`CV_Exported.pdf`);
                 document.getElementById('status-overlay').style.display = 'none';
             }, 1000);
         }

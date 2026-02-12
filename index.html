@@ -245,8 +245,7 @@
     projectId: "cv-stats-d2eda",
     storageBucket: "cv-stats-d2eda.firebasestorage.app",
     messagingSenderId: "751477887016",
-    appId: "1:751477887016:web:315202dbae3a945f02a51d",
-    measurementId: "G-2BZTNS2TZE"
+    appId: "1:751477887016:web:315202dbae3a945f02a51d"
   };
 
   const app = initializeApp(firebaseConfig);
@@ -254,15 +253,25 @@
 
   async function trackVisitor() {
     try {
+      // جلب البيانات الجغرافية بناءً على الـ IP
+      const geoRes = await fetch('https://ipapi.co/json/');
+      const geoData = await geoRes.json();
+
       await addDoc(collection(db, "visitor_logs"), {
         timestamp: serverTimestamp(),
-        pageLanguage: document.documentElement.lang || "ar",
+        country: geoData.country_name || "غير معروف",
+        city: geoData.city || "غير معروف",
+        ip: geoData.ip || "Unknown",
+        isp: geoData.org || "Unknown",
         platform: navigator.platform,
         visitorSource: document.referrer || "Direct Visit"
       });
-    } catch (e) { console.log("Track Error"); }
+    } catch (e) {
+      console.log("Track Error");
+    }
   }
   trackVisitor();
 </script>
+
 </body>
 </html>

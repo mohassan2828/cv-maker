@@ -235,5 +235,34 @@
         reader.readAsDataURL(e.target.files[0]);
     };
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBeTU1K8LyYh5ZRa9omgewSO9PP4JxFVf4",
+    authDomain: "cv-stats-d2eda.firebaseapp.com",
+    projectId: "cv-stats-d2eda",
+    storageBucket: "cv-stats-d2eda.firebasestorage.app",
+    messagingSenderId: "751477887016",
+    appId: "1:751477887016:web:315202dbae3a945f02a51d",
+    measurementId: "G-2BZTNS2TZE"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  async function trackVisitor() {
+    try {
+      await addDoc(collection(db, "visitor_logs"), {
+        timestamp: serverTimestamp(),
+        pageLanguage: document.documentElement.lang || "ar",
+        platform: navigator.platform,
+        visitorSource: document.referrer || "Direct Visit"
+      });
+    } catch (e) { console.log("Track Error"); }
+  }
+  trackVisitor();
+</script>
 </body>
 </html>

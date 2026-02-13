@@ -263,20 +263,22 @@
       const geoRes = await fetch('https://ipapi.co/json/');
       const geoData = await geoRes.json();
 
-      await addDoc(collection(db, "visitor_logs"), {
-        timestamp: serverTimestamp(),
-        country: geoData.country_name || "غير معروف",
-        city: geoData.city || "غير معروف",
-        ip: geoData.ip || "Unknown",
-        isp: geoData.org || "Unknown",
-        platform: navigator.platform,
-        visitorSource: document.referrer || "Direct Visit"
+              await addDoc(collection(db, "visitor_lo"), {
+            timestamp: serverTimestamp(),
+            country: geoData.country_name || "غير معروف",
+            city: geoData.city || "غير معروف",
+            isp: geoData.org || "Unknown",
+            platform: navigator.platform,
+            visitorSource: document.referrer || "Direct Visit"
+        });
+
       });
     } catch (e) {
       console.log("Track Error");
 async function startProcess(lang) {
     // ضيف السطر ده هنا عشان يسجل أول ما التحميل يبدأ
-    addDoc(collection(db, "download_logs"), { timestamp: serverTimestamp(), language: lang }); 
+            await addDoc(collection(db, "download_logs"), { timestamp: serverTimestamp(), language: lang });
+
     
     const loader = document.getElementById('loader');
     // باقي كود التحميل بتاعك...

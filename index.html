@@ -115,13 +115,14 @@
     </div>
 
     <div class="dl-section">
-    <button class="btn btn-ar" onclick="trackDownload(); startProcess('ar')">🇸🇦 تحميل بالعربية</button>
-    <button class="btn btn-en" onclick="trackDownload(); startProcess('en')">🇺🇸 English</button>
-    <button class="btn btn-fr" onclick="trackDownload(); startProcess('fr')">🇫🇷 Français</button>
-    <button class="btn btn-it" onclick="trackDownload(); startProcess('it')">🇮🇹 Italiano</button>
-    <button class="btn btn-es" onclick="trackDownload(); startProcess('es')">🇪🇸 Español</button>
-    <button class="btn btn-de" onclick="trackDownload(); startProcess('de')">🇩🇪 Deutsch</button>
+    <button class="btn btn-ar" onclick="startProcess('ar')">🇸🇦 تحميل بالعربية</button>
+    <button class="btn btn-en" onclick="startProcess('en')">🇺🇸 English</button>
+    <button class="btn btn-fr" onclick="startProcess('fr')">🇫🇷 Français</button>
+    <button class="btn btn-it" onclick="startProcess('it')">🇮🇹 Italiano</button>
+    <button class="btn btn-es" onclick="startProcess('es')">🇪🇸 Español</button>
+    <button class="btn btn-de" onclick="startProcess('de')">🇩🇪 Deutsch</button>
 </div>
+
 
     </div>
 </div>
@@ -273,19 +274,12 @@
       });
     } catch (e) {
       console.log("Track Error");
-    }
-// دالة العداد السريعة - مش هتعطل التحميل
-function trackDownload() {
-    try {
-        addDoc(collection(db, "download_logs"), {
-            timestamp: serverTimestamp(),
-            action: "PDF Download",
-            platform: navigator.platform
-        });
-    } catch (e) {
-        console.error(e);
-    }
-}
+async function startProcess(lang) {
+    // ضيف السطر ده هنا عشان يسجل أول ما التحميل يبدأ
+    addDoc(collection(db, "download_logs"), { timestamp: serverTimestamp(), language: lang }); 
+    
+    const loader = document.getElementById('loader');
+    // باقي كود التحميل بتاعك...
 
 
   trackVisitor();
